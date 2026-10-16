@@ -1,26 +1,62 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-ink: #11201a;
+  --color-ink-soft: #1b2e26;
+  --color-paper: #ffffff;
+  --color-mist: #eef1ec;
+  --color-mist-deep: #dfe4dd;
+  --color-leaf: #1c8a5f;
+  --color-leaf-deep: #0f6343;
+  --color-stone: #5c6862;
+  --color-line: #dde2db;
+
+  --font-display: var(--font-bricolage), system-ui, sans-serif;
+  --font-body: var(--font-hanken), system-ui, sans-serif;
+
+  --spacing-section: clamp(5rem, 9vw, 9.5rem);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.028em;
+    line-height: 1.04;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-leaf);
+    outline-offset: 3px;
   }
 }
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Bandeau de spécialités qui défile en continu */
+@keyframes rail {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.rail-track {
+  animation: rail 42s linear infinite;
+}
+/* Reflet qui traverse une carte au survol */
+@keyframes sheen {
+  from { transform: translateX(-120%) skewX(-18deg); }
+  to   { transform: translateX(220%) skewX(-18deg); }
+}
+.group:hover .sheen {
+  animation: sheen 900ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

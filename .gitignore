@@ -39,3 +39,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/app/generated/prisma
+
+# fichiers envoyés par les candidats — jamais versionnés
+/private
+
+# images téléversées depuis l'administration
+/public/uploads/*
+!/public/uploads/.gitkeep.agents/ 
+.claude/ 
+.windsurf/ 
+/public/clinique-essalem.mp4 
+/public/*.mp4 
+/public/*.mp4 

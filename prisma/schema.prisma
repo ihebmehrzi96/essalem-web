@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  excerpt   String?
+  body      String
+  image     String?
+  kind      String   @default("Actualité")
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([published, createdAt])
+}
+model JobOffer {
+  id        String   @id @default(cuid())
+  ref       String
+  title     String
+  body      String
+  active    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  applications Application[]
+
+  @@index([active, createdAt])
+}
+
+model Application {
+  id         String  @id @default(cuid())
+  jobOfferId String?
+
+  // Identité
+  lastName      String
+  firstName     String
+  maritalStatus String
+  email         String
+  phone         String
+  birthDate     DateTime?
+
+  // Coordonnées
+  address    String?
+  city       String?
+  postalCode String?
+
+  // Parcours
+  qualification String?
+  promoYear     String?
+
+  // Pièces jointes : chemins vers /uploads/candidatures/
+  cv          String?
+  motivation  String?
+  diploma     String?
+  baccalaureat String?
+  transcripts String[]      @default([])
+
+  handled   Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  jobOffer JobOffer? @relation(fields: [jobOfferId], references: [id], onDelete: SetNull)
+
+  @@index([handled, createdAt])
+}
