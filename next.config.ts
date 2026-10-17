@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     agentFeedback: true,
     serverActions: {
       // Doit rester cohérent avec MAX_SIZE dans lib/upload.ts
-      bodySizeLimit: "5mb",
+      bodySizeLimit: "30mb",
     },
   },
   cacheComponents: true,
