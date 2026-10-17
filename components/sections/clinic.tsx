@@ -1,9 +1,13 @@
-import Link from "next/link";
-import Counter from "@/components/counter";
-import { clinic, figures, specialties } from "@/lib/content";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { Link } from "@/i18n/routing";
+import Counter from "@/components/counter";
+import { figures, specialties } from "@/lib/content";
 
 export default function Clinic() {
+  const t = useTranslations("clinic");
+  const tf = useTranslations("figures");
+
   return (
     <>
       {/* Bandeau défilant */}
@@ -18,13 +22,13 @@ export default function Clinic() {
         </div>
       </div>
 
-      {/* Présentation */}
       <section id="clinique" className="px-5 py-(--spacing-section) sm:px-6 md:px-12">
         <div className="mx-auto grid max-w-[1280px] gap-10 lg:grid-cols-[minmax(0,0.75fr)_1fr] lg:gap-20">
+
           <div className="relative min-h-[320px] overflow-hidden rounded-3xl bg-ink-soft lg:min-h-[580px]">
             <Image
               src="/images/hall-accueil.jpg"
-              alt="Le hall d'accueil de la Clinique Essalem"
+              alt=""
               fill
               sizes="(max-width: 1024px) 100vw, 40vw"
               className="object-cover"
@@ -33,25 +37,20 @@ export default function Clinic() {
 
           <div className="flex flex-col justify-center gap-8">
             <h2 className="max-w-[16ch] text-[clamp(2rem,4.4vw,3.4rem)]">
-              Une clinique pensée autour du patient
+              {t("heading")}
             </h2>
 
-            <p className="max-w-[58ch] leading-relaxed text-stone">
-              {clinic.intro}
-            </p>
+            <p className="max-w-[58ch] leading-relaxed text-stone">{t("intro")}</p>
 
-            <p className="max-w-[52ch] leading-relaxed">
-              Renforcer la dynamique qualité-sécurité dans nos prestations est notre
-              priorité.
-            </p>
+            <p className="max-w-[52ch] leading-relaxed">{t("quality")}</p>
 
             <dl className="grid grid-cols-2 gap-x-8 gap-y-7 border-t border-line pt-8">
               {figures.map((figure) => (
-                <div key={figure.label}>
-                  <dt className="sr-only">{figure.label}</dt>
+                <div key={figure.key}>
+                  <dt className="sr-only">{tf(figure.key)}</dt>
                   <dd className="flex flex-col gap-1">
                     <Counter to={figure.value} suffix={figure.suffix} todo={figure.todo} />
-                    <span className="text-[0.92rem] text-stone">{figure.label}</span>
+                    <span className="text-[0.92rem] text-stone">{tf(figure.key)}</span>
                   </dd>
                 </div>
               ))}
@@ -62,13 +61,13 @@ export default function Clinic() {
                 href="/presentation"
                 className="inline-flex min-h-12 items-center rounded-full bg-ink px-6 font-medium text-paper transition-colors hover:bg-leaf-deep"
               >
-                Découvrir la clinique
+                {t("discover")}
               </Link>
               <Link
                 href="/demarche-qualite"
                 className="inline-flex min-h-12 items-center rounded-full border border-line px-6 font-medium transition-colors hover:border-ink"
               >
-                Démarche qualité
+                {t("qualityLink")}
               </Link>
             </div>
           </div>

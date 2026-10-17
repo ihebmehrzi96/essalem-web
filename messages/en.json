@@ -1,0 +1,78 @@
+{
+  "nav": {
+    "clinic": "The clinic",
+    "presentation": "About us",
+    "quality": "Quality approach",
+    "services": "Our services",
+    "surgical": "Surgical specialties",
+    "medical": "Medical specialties",
+    "gyneco": "Gynaecology & Obstetrics",
+    "technical": "Technical platform",
+    "emergency": "Emergency department",
+    "stay": "Hospitalisation",
+    "news": "News",
+    "career": "Careers",
+    "contact": "Contact"
+  },
+  "hero": {
+    "line1": "Your health is",
+    "line2": "our priority",
+    "badge": "years serving patients in Sousse",
+    "intro": "Our multidisciplinary clinic provides comprehensive care in surgery, medicine, gynaecology-obstetrics and imaging."
+  },
+  "clinic": {
+    "heading": "A clinic built around the patient",
+    "intro": "Active for over 20 years, Clinique Essalem is a private multidisciplinary care facility providing medical and surgical services that meet our patients' health needs.",
+    "quality": "Strengthening quality and safety across our services is our priority.",
+    "discover": "Discover the clinic",
+    "qualityLink": "Quality approach"
+  },
+  "services": {
+    "heading": "Complete care, under one roof",
+    "surgical": {
+      "title": "Surgical specialties",
+      "blurb": "Operating theatres and surgical teams covering a wide range of procedures."
+    },
+    "medical": {
+      "title": "Medical specialties",
+      "blurb": "Consultations, diagnosis and follow-up by specialist physicians."
+    },
+    "gyneco": {
+      "title": "Gynaecology & Obstetrics",
+      "blurb": "Pregnancy monitoring, maternity and gynaecological care."
+    },
+    "technical": {
+      "title": "Technical platform",
+      "blurb": "Imaging, laboratory and equipment supporting diagnosis."
+    },
+    "emergency": {
+      "title": "Emergency department",
+      "blurb": "A team available 24 hours a day, 7 days a week."
+    }
+  },
+  "figures": {
+    "years": "years of activity",
+    "specialties": "specialties",
+    "beds": "hospital beds",
+    "emergency": "emergency department"
+  },
+  "news": {
+    "heading": "News",
+    "all": "All news",
+    "seeMore": "Read more"
+  },
+  "footer": {
+    "services": "Our services",
+    "keepInTouch": "Keep in touch",
+    "review": "Leave a review",
+    "recruitment": "Careers",
+    "contact": "Contact",
+    "follow": "Follow us",
+    "rights": "All rights reserved."
+  },
+  "common": {
+    "allServices": "All specialties",
+    "apply": "Apply",
+    "back": "Back"
+  }
+}

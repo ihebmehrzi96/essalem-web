@@ -1,16 +1,16 @@
 "use client";
 
-import Link from "next/link";
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { AnimatePresence, motion } from "motion/react";
+import { Link } from "@/i18n/routing";
 import type { NavItem } from "@/lib/content";
 
 export default function NavDropdown({ item }: { item: NavItem }) {
+  const t = useTranslations("nav");
   const [open, setOpen] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Petit délai à la sortie : évite que le menu disparaisse
-  // quand la souris traverse l'espace entre le lien et le panneau.
   const show = () => {
     if (timer.current) clearTimeout(timer.current);
     setOpen(true);
@@ -25,7 +25,7 @@ export default function NavDropdown({ item }: { item: NavItem }) {
         href={item.href}
         className="whitespace-nowrap transition-colors hover:text-leaf"
       >
-        {item.label}
+        {t(item.key)}
       </Link>
     );
   }
@@ -43,7 +43,7 @@ export default function NavDropdown({ item }: { item: NavItem }) {
         className="flex items-center gap-1.5 whitespace-nowrap py-2 transition-colors hover:text-leaf"
         aria-expanded={open}
       >
-        {item.label}
+        {t(item.key)}
         <motion.svg
           width="13"
           height="13"
@@ -64,7 +64,7 @@ export default function NavDropdown({ item }: { item: NavItem }) {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="absolute left-1/2 top-full z-50 w-[270px] -translate-x-1/2 pt-4"
+            className="absolute left-1/2 top-full z-50 w-[280px] -translate-x-1/2 pt-4"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -77,7 +77,7 @@ export default function NavDropdown({ item }: { item: NavItem }) {
                   href={child.href}
                   className="group flex items-center justify-between gap-3 rounded-xl px-4 py-3 text-[0.95rem] transition-colors hover:bg-mist"
                 >
-                  <span>{child.label}</span>
+                  <span>{t(child.key)}</span>
                   <svg
                     width="14"
                     height="14"
@@ -87,7 +87,7 @@ export default function NavDropdown({ item }: { item: NavItem }) {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="shrink-0 text-stone opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+                    className="shrink-0 text-stone opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100 rtl:-scale-x-100"
                     aria-hidden="true"
                   >
                     <path d="M5 12h14" />

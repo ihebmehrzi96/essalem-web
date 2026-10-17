@@ -1,0 +1,78 @@
+{
+  "nav": {
+    "clinic": "La clinique",
+    "presentation": "Présentation",
+    "quality": "Démarche qualité",
+    "services": "Nos services",
+    "surgical": "Spécialités chirurgicales",
+    "medical": "Spécialités médicales",
+    "gyneco": "Gynécologie-Obstétrique",
+    "technical": "Plateau technique",
+    "emergency": "Service des urgences",
+    "stay": "Hospitalisation",
+    "news": "Actualités",
+    "career": "Carrière",
+    "contact": "Contact"
+  },
+  "hero": {
+    "line1": "Votre santé est",
+    "line2": "notre préoccupation",
+    "badge": "années au service des patients de Sousse",
+    "intro": "Notre clinique multidisciplinaire propose une prise en charge complète en chirurgie, médecine, gynécologie-obstétrique et imagerie."
+  },
+  "clinic": {
+    "heading": "Une clinique pensée autour du patient",
+    "intro": "Active depuis plus de 20 ans, la Clinique Essalem est un établissement multidisciplinaire privé de soins offrant des prestations et des services médicaux et chirurgicaux qui répondent aux besoins de santé de nos patients.",
+    "quality": "Renforcer la dynamique qualité-sécurité dans nos prestations est notre priorité.",
+    "discover": "Découvrir la clinique",
+    "qualityLink": "Démarche qualité"
+  },
+  "services": {
+    "heading": "Une prise en charge complète, sous un même toit",
+    "surgical": {
+      "title": "Spécialités chirurgicales",
+      "blurb": "Blocs opératoires et équipes chirurgicales pour un large éventail d'interventions."
+    },
+    "medical": {
+      "title": "Spécialités médicales",
+      "blurb": "Consultations, diagnostic et suivi assurés par des médecins spécialistes."
+    },
+    "gyneco": {
+      "title": "Gynécologie-Obstétrique",
+      "blurb": "Suivi de grossesse, maternité et prise en charge gynécologique."
+    },
+    "technical": {
+      "title": "Plateau technique",
+      "blurb": "Imagerie, laboratoire et équipements au service du diagnostic."
+    },
+    "emergency": {
+      "title": "Service des urgences",
+      "blurb": "Une équipe disponible 24 heures sur 24, 7 jours sur 7."
+    }
+  },
+  "figures": {
+    "years": "années d'activité",
+    "specialties": "spécialités",
+    "beds": "lits d'hospitalisation",
+    "emergency": "service des urgences"
+  },
+  "news": {
+    "heading": "Actualités",
+    "all": "Toutes les actualités",
+    "seeMore": "Voir plus"
+  },
+  "footer": {
+    "services": "Nos services",
+    "keepInTouch": "Restons en contact",
+    "review": "Donner votre avis",
+    "recruitment": "Recrutement",
+    "contact": "Contact",
+    "follow": "Suivez-nous",
+    "rights": "Tous droits réservés."
+  },
+  "common": {
+    "allServices": "Toutes les spécialités",
+    "apply": "Postuler",
+    "back": "Retour"
+  }
+}

@@ -1,16 +1,16 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import { clinic } from "@/lib/content";
 
 const MAP_SRC =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3234.3916896023056!2d10.618824216098437!3d35.83939798015767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13027580bf92c027%3A0xcdb5761297fc24b0!2sClinique%20Essalem%20Sousse!5e0!3m2!1sfr!2stn!4v1600960303372!5m2!1sfr!2stn";
 
-/** Carte pleine largeur, juste au-dessus du pied de page. */
 export function Contact() {
   return (
     <div className="h-[320px] w-full sm:h-[420px]">
       <iframe
         src={MAP_SRC}
-        title="Plan d'accès à la Clinique Essalem"
+        title="Clinique Essalem"
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
         className="h-full w-full border-0"
@@ -20,13 +20,15 @@ export function Contact() {
 }
 
 export default function SiteFooter() {
+  const t = useTranslations("footer");
+  const tn = useTranslations("nav");
+
   return (
     <footer className="bg-ink-soft px-5 py-16 text-white/60 sm:px-6 md:px-12">
       <div className="mx-auto max-w-[1280px]">
 
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
 
-          {/* Coordonnées */}
           <div>
             <span className="font-display block text-lg text-paper">
               {clinic.name}
@@ -38,6 +40,7 @@ export default function SiteFooter() {
             </p>
             <a
               href={clinic.phoneHref}
+              dir="ltr"
               className="mt-4 inline-flex items-center gap-2.5 text-paper transition-colors hover:text-leaf"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -47,33 +50,30 @@ export default function SiteFooter() {
             </a>
           </div>
 
-          {/* Services */}
           <nav className="flex flex-col gap-3 text-[0.95rem]">
-            <span className="mb-1 text-paper">Nos services</span>
-            <Link href="/services/specialites-chirurgicales" className="hover:text-paper">Spécialités chirurgicales</Link>
-            <Link href="/services/specialites-medicales" className="hover:text-paper">Spécialités médicales</Link>
-            <Link href="/services/gynecologie-obstetrique" className="hover:text-paper">Gynécologie-Obstétrique</Link>
-            <Link href="/services/plateau-technique" className="hover:text-paper">Plateau technique</Link>
-            <Link href="/services/urgences" className="hover:text-paper">Service des urgences</Link>
+            <span className="mb-1 text-paper">{t("services")}</span>
+            <Link href="/services/specialites-chirurgicales" className="hover:text-paper">{tn("surgical")}</Link>
+            <Link href="/services/specialites-medicales" className="hover:text-paper">{tn("medical")}</Link>
+            <Link href="/services/gynecologie-obstetrique" className="hover:text-paper">{tn("gyneco")}</Link>
+            <Link href="/services/plateau-technique" className="hover:text-paper">{tn("technical")}</Link>
+            <Link href="/services/urgences" className="hover:text-paper">{tn("emergency")}</Link>
           </nav>
 
-          {/* Restons en contact */}
           <nav className="flex flex-col gap-3 text-[0.95rem]">
-            <span className="mb-1 text-paper">Restons en contact</span>
+            <span className="mb-1 text-paper">{t("keepInTouch")}</span>
             <Link href="/enquete-satisfaction" className="underline underline-offset-4 hover:text-paper">
-              Donner votre avis
+              {t("review")}
             </Link>
             <Link href="/recrutement" className="underline underline-offset-4 hover:text-paper">
-              Recrutement
+              {t("recruitment")}
             </Link>
             <Link href="/contact" className="underline underline-offset-4 hover:text-paper">
-              Contact
+              {t("contact")}
             </Link>
           </nav>
 
-          {/* Suivez-nous */}
           <div>
-            <span className="mb-4 block text-[0.95rem] text-paper">Suivez-nous</span>
+            <span className="mb-4 block text-[0.95rem] text-paper">{t("follow")}</span>
             <div className="flex gap-3">
               <a
                 href={clinic.facebook}
@@ -99,7 +99,7 @@ export default function SiteFooter() {
         </div>
 
         <div className="mt-14 flex flex-wrap justify-between gap-4 border-t border-white/10 pt-7 text-[0.85rem]">
-          <span>© 2026 {clinic.name}. Tous droits réservés.</span>
+          <span>© 2026 {clinic.name}. {t("rights")}</span>
           <span>Sousse, Tunisie</span>
         </div>
 
