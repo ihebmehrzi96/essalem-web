@@ -75,3 +75,46 @@ export const figures = [
   { value: 0, suffix: "", key: "beds", todo: true },
   { value: 24, suffix: "h/24", key: "emergency" },
 ];
+
+/** Contenu détaillé de chaque service, en français (non traduit). */
+export const serviceDetails: Record<
+  string,
+  { intro: string; sections: { title: string; body: string }[] }
+> = {
+  "specialites-chirurgicales": {
+    intro: "[TEXTE À REPRENDRE DU SITE ACTUEL — présentation des spécialités chirurgicales]",
+    sections: [
+      { title: "Chirurgie générale", body: "[TEXTE]" },
+      { title: "Chirurgie esthétique", body: "[TEXTE]" },
+      { title: "Orthopédie", body: "[TEXTE]" },
+    ],
+  },
+  "specialites-medicales": {
+    intro: "[TEXTE À REPRENDRE — présentation des spécialités médicales]",
+    sections: [
+      { title: "Cardiologie", body: "[TEXTE]" },
+      { title: "Gastro-entérologie", body: "[TEXTE]" },
+    ],
+  },
+  "gynecologie-obstetrique": {
+    intro: "[TEXTE À REPRENDRE — gynécologie et obstétrique]",
+    sections: [
+      { title: "Suivi de grossesse", body: "[TEXTE]" },
+      { title: "Maternité", body: "[TEXTE]" },
+    ],
+  },
+  "plateau-technique": {
+    intro: "[TEXTE À REPRENDRE — plateau technique]",
+    sections: [
+      { title: "Imagerie médicale", body: "[TEXTE]" },
+      { title: "Laboratoire", body: "[TEXTE]" },
+    ],
+  },
+  urgences: {
+    intro: "[TEXTE À REPRENDRE — service des urgences]",
+    sections: [
+      { title: "Accueil permanent", body: "[TEXTE]" },
+      { title: "Prise en charge", body: "[TEXTE]" },
+    ],
+  },
+};
