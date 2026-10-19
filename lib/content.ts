@@ -5,6 +5,8 @@ export const clinic = {
   phoneHref: "tel:+21673210375",
   facebook: "https://www.facebook.com/cliniqueEssalemSousse",
   linkedin: "https://www.linkedin.com/in/clinique-essalem-sousse-331a30171/",
+    email: "contact@clinique-essalem.com",
+  instagram: "https://www.instagram.com/cliniqueessalemsousse/?hl=fr",
 };
 
 export type NavItem = {
@@ -118,3 +120,4 @@ export const serviceDetails: Record<
     ],
   },
 };
+

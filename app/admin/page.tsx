@@ -27,6 +27,11 @@ const sections = [
     href: "/admin/newsletters",
     description: "Voir les abonnés et envoyer une newsletter.",
   },
+    {
+    label: "Messages",
+    href: "/admin/messages",
+    description: "Lire et répondre aux messages du formulaire de contact.",
+  },
 ];
 
 export default async function AdminPage() {

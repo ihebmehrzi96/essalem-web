@@ -3,6 +3,7 @@ import Image from "next/image";
 import { logout } from "@/app/admin/actions";
 
 const adminNav = [
+  { label: "Messages", href: "/admin/messages" },
   { label: "Enquête de satisfaction", href: "/admin/enquete-satisfaction" },
   { label: "Offres d'emploi", href: "/admin/offres-emploi" },
   { label: "Actualités", href: "/admin/actualites" },
