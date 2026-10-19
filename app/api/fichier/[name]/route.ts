@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { privateFilePath } from "@/lib/private-upload";
-
+export const instant = false;
 const TYPES: Record<string, string> = {
   pdf: "application/pdf",
   jpg: "image/jpeg",

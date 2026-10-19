@@ -68,3 +68,8 @@
     transition-duration: 0.01ms !important;
   }
 }
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3 {
+    line-height: 1.3;
+  }

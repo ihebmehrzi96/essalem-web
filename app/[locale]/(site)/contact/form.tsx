@@ -2,22 +2,20 @@
 
 import { useActionState } from "react";
 import { sendMessage, type ContactState } from "./actions";
+import type { ContactContent } from "@/content/contact";
 
 const initial: ContactState = {};
 const FIELD =
   "h-13 w-full border border-line bg-paper px-4 outline-none transition-colors focus:border-ink";
 
-export default function ContactForm() {
+export default function ContactForm({ t }: { t: ContactContent["form"] }) {
   const [state, action, pending] = useActionState(sendMessage, initial);
 
   if (state.success) {
     return (
       <div className="bg-leaf/10 p-8">
-        <h2 className="text-[1.3rem]">Message envoyé</h2>
-        <p className="mt-3 leading-relaxed text-stone">
-          Nous avons bien reçu votre message et nous nous engageons à vous
-          répondre dans les plus brefs délais.
-        </p>
+        <h2 className="text-[1.3rem]">{t.successTitle}</h2>
+        <p className="mt-3 leading-relaxed text-stone">{t.successBody}</p>
       </div>
     );
   }
@@ -36,14 +34,14 @@ export default function ContactForm() {
 
       <div className="flex flex-col gap-2">
         <label htmlFor="name" className="text-[0.88rem] font-medium">
-          Votre nom *
+          {t.name} *
         </label>
         <input id="name" name="name" required maxLength={120} className={FIELD} />
       </div>
 
       <div className="flex flex-col gap-2">
         <label htmlFor="email" className="text-[0.88rem] font-medium">
-          E-mail *
+          {t.email} *
         </label>
         <input
           id="email"
@@ -51,20 +49,21 @@ export default function ContactForm() {
           type="email"
           required
           autoComplete="email"
+          dir="ltr"
           className={FIELD}
         />
       </div>
 
       <div className="flex flex-col gap-2">
         <label htmlFor="subject" className="text-[0.88rem] font-medium">
-          Sujet
+          {t.subject}
         </label>
         <input id="subject" name="subject" maxLength={160} className={FIELD} />
       </div>
 
       <div className="flex flex-col gap-2">
         <label htmlFor="message" className="text-[0.88rem] font-medium">
-          Message *
+          {t.message} *
         </label>
         <textarea
           id="message"
@@ -77,7 +76,7 @@ export default function ContactForm() {
 
       {state.error && (
         <p role="alert" className="bg-red-50 px-4 py-3 text-[0.9rem] text-red-700">
-          {state.error}
+          {state.error === "required" ? t.errorRequired : t.errorEmail}
         </p>
       )}
 
@@ -86,7 +85,7 @@ export default function ContactForm() {
         disabled={pending}
         className="group mt-2 inline-flex min-h-13 w-fit items-center gap-3 rounded-full bg-ink px-8 font-medium text-paper transition-colors hover:bg-leaf-deep disabled:opacity-50"
       >
-        {pending ? "Envoi en cours…" : "Envoyer message"}
+        {pending ? t.sending : t.submit}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-500 group-hover:translate-x-1 rtl:-scale-x-100" aria-hidden="true">
           <path d="M5 12h14" /><path d="m13 6 6 6-6 6" />
         </svg>

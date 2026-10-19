@@ -5,7 +5,7 @@ import { setRequestLocale } from "next-intl/server";
 import { Bricolage_Grotesque, Hanken_Grotesk, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
-
+export const instant = false;
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-bricolage",

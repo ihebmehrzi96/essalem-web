@@ -1,74 +1,46 @@
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import SlideIn from "@/components/slide-in";
 import Reveal from "@/components/reveal";
 import { clinic } from "@/lib/content";
-
-export const metadata = {
-  title: "Votre séjour — Clinique Essalem",
-  description:
-    "Visites, hébergement, restauration, transport sanitaire et consignes pratiques pour votre hospitalisation à la Clinique Essalem.",
-};
-
-const sections = [
-  {
-    id: "visites",
-    label: "Visites",
-    image: "/images/sejour/visites.jpg",
-    body: [
-      "Les patients hospitalisés peuvent recevoir les visites de leurs proches tous les jours de la semaine de 10h à 22h pour toutes les unités de soins conventionnelles. Les visites en réanimation et en soins intensifs sont autorisées de 15h à 17h.",
-    ],
-    tags: ["10h — 22h", "Réanimation : 15h — 17h"],
-  },
-  {
-    id: "hebergement",
-    label: "Hébergement et restauration",
-    image: "/images/sejour/restauration.jpg",
-    body: [
-      "Votre prise en charge peut se faire dans le cadre d'une hospitalisation classique ou en hôpital de jour. Une chambre vous sera proposée selon votre choix et en fonction des disponibilités. Un de vos proches peut être hébergé à vos côtés et vous accompagner durant votre séjour, sauf contre-indication médicale.",
-      "Nos cuisiniers et nos diététiciennes s'efforceront de satisfaire vos besoins en vous proposant des plats équilibrés et bien étudiés, préparés avec des produits frais et servis dans des plateaux isothermes.",
-    ],
-    tags: ["Chambre individuelle", "Chambre double", "Chambre premium"],
-  },
-  {
-    id: "transport",
-    label: "Transport sanitaire",
-    image: "/images/sejour/ambulance.jpg",
-    body: [
-      "Nous disposons d'une ambulance médicalisée qui est mise à votre disposition pour assurer vos transports sanitaires.",
-    ],
-    tags: ["Ambulance médicalisée"],
-  },
-  {
-    id: "objets",
-    label: "Biens et objets de valeur",
-    image: "/images/sejour/coffre.jpg",
-    body: [
-      "Dans le but d'assurer la sécurité de tous vos objets de valeur tels vos bijoux, vos portefeuilles, vos téléphones…, nous disposons d'une procédure et d'un coffre-fort pour y déposer tous ces objets.",
-      "Les objets et biens non déclarés demeurent sous la responsabilité du patient en cas de perte.",
-    ],
-    tags: ["Coffre-fort", "Procédure de dépôt"],
-  },
+import { sejour } from "@/content/sejour";
+export const instant = false;
+/** Visuel associé à chaque section, dans l'ordre. */
+const IMAGES = [
+  "/images/sejour/visites.jpg",
+  "/images/sejour/restauration.jpg",
+  "/images/sejour/ambulance.jpg",
+  "/images/sejour/coffre.jpg",
 ];
 
-const rules = [
-  "Ne pas fumer dans l'enceinte de l'établissement (décret n° 98-2248 du 16/11/98)",
-  "Ne pas amener ni consommer de boissons alcoolisées",
-  "Ne pas ramener des animaux dans l'enceinte de l'établissement",
-  "Ne pas ramener des fleurs coupées ou plantes vertes en pot au service de réanimation",
-];
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const page = sejour[locale as keyof typeof sejour];
 
-const notes = [
-  "Un livret d'accueil vous est remis à votre admission",
-  "Le plan d'évacuation est affiché dans différents endroits de l'établissement et dans votre chambre",
-  "La tarification des prestations et le règlement intérieur sont aussi affichés dans votre chambre",
-];
+  return {
+    title: `${page?.title ?? "Votre séjour"} — Clinique Essalem`,
+    description: page?.sections[0]?.body[0]?.slice(0, 160),
+  };
+}
 
-export default function SejourPage() {
+export default async function SejourPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const page = sejour[locale as keyof typeof sejour];
+  if (!page) notFound();
+
   return (
     <main className="overflow-x-hidden pb-(--spacing-section)">
 
-      {/* Couverture */}
-      <div className="relative h-[58svh] min-h-[360px] w-full bg-ink-soft">
+      {/* Bandeau image pleine largeur */}
+      <div className="relative h-[65svh] min-h-[280px] w-full bg-ink-soft">
         <Image
           src="/images/sejour/cover.jpg"
           alt=""
@@ -77,23 +49,19 @@ export default function SejourPage() {
           sizes="100vw"
           className="object-cover object-[center_40%]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
-
-        <div className="absolute inset-x-0 bottom-0 px-5 pb-12 sm:px-8 md:pb-16">
-          <div className="mx-auto max-w-[1150px]">
-            <span className="text-[0.8rem] tracking-[0.24em] text-paper/70 uppercase">
-              Votre hospitalisation
-            </span>
-            <h1 className="mt-4 text-[clamp(2.4rem,6.5vw,5rem)] leading-[0.98] text-paper">
-              Votre séjour
-            </h1>
-          </div>
-        </div>
+        <div className="absolute inset-0 bg-ink/25" />
       </div>
 
-      <div className="mx-auto mt-24 max-w-[1150px] px-5 sm:px-8">
+      {/* Titre qui chevauche l'image */}
+      <div className="relative z-10 -mt-12 px-5 sm:px-6">
+        <h1 className="mx-auto w-fit max-w-[90%] rounded-sm bg-ink px-12 py-5 text-center text-[clamp(1.6rem,3.6vw,2.6rem)] text-paper sm:px-20">
+          {page.title}
+        </h1>
+      </div>
 
-        {sections.map((section, i) => {
+      <div className="mx-auto mt-20 max-w-[1150px] px-5 sm:px-8">
+
+        {page.sections.map((section, i) => {
           const reversed = i % 2 === 1;
 
           return (
@@ -109,7 +77,7 @@ export default function SejourPage() {
               >
                 <div className="relative h-[280px] w-full overflow-hidden bg-mist sm:h-[380px]">
                   <Image
-                    src={section.image}
+                    src={IMAGES[i]}
                     alt=""
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -117,7 +85,6 @@ export default function SejourPage() {
                   />
                 </div>
 
-                {/* Carré d'accent en débord */}
                 <span
                   className={`absolute -bottom-4 h-16 w-16 bg-leaf ${
                     reversed ? "-start-4" : "-end-4"
@@ -125,7 +92,6 @@ export default function SejourPage() {
                   aria-hidden="true"
                 />
 
-                {/* Numéro */}
                 <span
                   className={`font-display absolute -top-7 text-[3.5rem] leading-none text-mist-deep ${
                     reversed ? "end-0" : "start-0"
@@ -148,22 +114,10 @@ export default function SejourPage() {
                 <div className="mt-5 h-px w-12 bg-leaf" aria-hidden="true" />
 
                 <div className="mt-6 space-y-5">
-                  {section.body.map((p) => (
-                    <p key={p} className="text-[0.98rem] leading-[1.8] text-ink">
+                  {section.body.map((p, j) => (
+                    <p key={j} className="text-[0.98rem] leading-[1.8] text-ink">
                       {p}
                     </p>
-                  ))}
-                </div>
-
-                {/* Repères */}
-                <div className="mt-7 flex flex-wrap gap-2">
-                  {section.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-line px-4 py-2 text-[0.84rem] text-stone transition-colors hover:border-leaf hover:text-leaf-deep"
-                    >
-                      {tag}
-                    </span>
                   ))}
                 </div>
               </SlideIn>
@@ -175,20 +129,22 @@ export default function SejourPage() {
         <Reveal>
           <section className="mt-28 bg-ink p-8 sm:p-12">
             <h2 className="text-[0.92rem] tracking-[0.22em] text-leaf uppercase">
-              Consignes et informations pour nos patients
+              {locale === "ar"
+                ? "تعليمات ومعلومات"
+                : locale === "en"
+                  ? "Instructions and information for our patients"
+                  : "Consignes et informations pour nos patients"}
             </h2>
             <div className="mt-5 h-px w-12 bg-leaf" aria-hidden="true" />
 
             <div className="mt-9 grid gap-10 md:grid-cols-2 md:gap-16">
               <div>
                 <p className="text-[0.98rem] leading-[1.8] text-paper/85">
-                  Pour votre sécurité, nous vous prions de respecter le
-                  règlement intérieur de notre établissement et de suivre les
-                  consignes suivantes&nbsp;:
+                  {page.rulesIntro}
                 </p>
 
                 <ul className="mt-6 space-y-4">
-                  {rules.map((rule) => (
+                  {page.rules.map((rule) => (
                     <li
                       key={rule}
                       className="flex gap-4 text-[0.96rem] leading-[1.75] text-paper/70"
@@ -204,7 +160,7 @@ export default function SejourPage() {
               </div>
 
               <div className="space-y-5 border-s border-white/12 ps-7">
-                {notes.map((note) => (
+                {page.notes.map((note) => (
                   <p
                     key={note}
                     className="text-[0.94rem] leading-[1.75] text-paper/55"
@@ -220,9 +176,7 @@ export default function SejourPage() {
         {/* Contact */}
         <Reveal>
           <div className="mt-20 flex flex-wrap items-center justify-between gap-6 border-t border-line pt-10">
-            <p className="text-[1.05rem] text-stone">
-              Une question sur votre séjour&nbsp;?
-            </p>
+            <p className="text-[1.05rem] text-stone">{page.question}</p>
             <a
               href={clinic.phoneHref}
               dir="ltr"

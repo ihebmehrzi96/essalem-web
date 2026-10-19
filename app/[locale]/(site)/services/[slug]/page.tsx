@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Link } from "@/i18n/routing";
 import { services, serviceDetails, clinic } from "@/lib/content";
 import Reveal from "@/components/reveal";
-
+export const instant = false;
 /** Génère les cinq pages à la construction. */
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));

@@ -60,7 +60,7 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          <h1 className="max-w-[18ch] text-[clamp(2.1rem,7vw,5.6rem)] text-paper">
+                  <h1 className="max-w-[18ch] text-[clamp(2.1rem,7vw,5.6rem)] leading-[1.18] text-paper">
             {lines.map((line, i) => (
               <span key={line} className="block overflow-hidden">
                 <motion.span
