@@ -2,7 +2,7 @@ import type { Category } from "./types";
 
 export const chirurgicales: Category = {
   slug: "specialites-chirurgicales",
-  image: "/images/services/chirurgie-cover.jpg",
+  image: "/images/services/chirurgie-cover2.jpg",
   title: {
     fr: "Spécialités chirurgicales",
     ar: "الاختصاصات الجراحية",

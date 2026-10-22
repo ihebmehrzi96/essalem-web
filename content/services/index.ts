@@ -3,7 +3,7 @@ import { chirurgicales } from "./chirurgicales";
 import { medicales } from "./medicales";
 import { gynecologie } from "./gynecologie";
 import { plateauTechnique } from "./plateau-technique";
-import { urgence } from "./urgence";
+import { urgences } from "./urgence";
 
 export type { Locale, Text, Specialty, Category } from "./types";
 
@@ -12,7 +12,7 @@ export const categories: Category[] = [
   medicales,
   gynecologie,
   plateauTechnique,
- urgence
+ urgences,
 ];
 
 /* ───────── Helpers ───────── */

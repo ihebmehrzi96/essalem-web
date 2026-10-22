@@ -43,10 +43,10 @@ export default async function SpecialtyPage({
     <main className="pb-(--spacing-section)">
 
       {/* Bandeau */}
-      <div className="relative h-[46svh] min-h-[260px] w-full bg-ink-soft">
-        {item.image && (
+      <div className="relative h-[65svh] min-h-[260px] w-full bg-ink-soft">
+        {category.image && (
           <Image
-            src={item.image}
+            src={category.image}
             alt=""
             fill
             priority
@@ -73,7 +73,7 @@ export default async function SpecialtyPage({
 
         {/* Visuel + texte */}
         <div className="grid gap-10 md:grid-cols-2 md:gap-12">
-          <div className="relative aspect-[4/3] w-full overflow-hidden bg-mist">
+          <div className="relative aspect-[3/4] w-full overflow-hidden bg-mist">
             {item.image && (
               <Image
                 src={item.image}

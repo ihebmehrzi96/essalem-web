@@ -16,5 +16,8 @@ export type Category = {
   title: Text;
   intro?: Text;
   image?: string;
+    body?: Text;
+  /** Image affichée à côté du texte, pour un pôle à page simple. */
+  bodyImage?: string;
   specialties: Specialty[];
 };

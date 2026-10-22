@@ -52,8 +52,9 @@
   to   { transform: translateX(-50%); }
 }
 .rail-track {
-  animation: rail 42s linear infinite;
+  animation: rail 60s linear infinite;
 }
+
 /* Reflet qui traverse une carte au survol */
 @keyframes sheen {
   from { transform: translateX(-120%) skewX(-18deg); }

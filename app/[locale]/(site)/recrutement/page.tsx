@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { listActiveOffers } from "@/lib/jobs";
 import Reveal from "@/components/reveal";
-
+import Image from "next/image";
 export const instant = false;
 
 export const metadata = {
@@ -39,12 +39,18 @@ export default async function RecrutementPage() {
   return (
     <>
       {/* Héro */}
-      <section className="relative overflow-hidden bg-ink px-5 pt-36 pb-20 sm:px-6 md:px-12 md:pt-48 md:pb-28">
-        {/* Halo discret en fond */}
-        <div
-          className="pointer-events-none absolute -top-40 -right-32 h-[520px] w-[520px] rounded-full bg-leaf/18 blur-[140px]"
-          aria-hidden="true"
+        <section className="relative overflow-hidden bg-ink px-5 pt-36 pb-20 sm:px-6 md:px-12 md:pt-48 md:pb-28">
+        {/* Image de couverture */}
+        <Image
+          src="/images/recrutement-cover.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
         />
+        {/* Voile sombre pour garder le texte lisible */}
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/65 to-ink/45" />
 
         <div className="relative mx-auto max-w-[1280px]">
           <span className="inline-flex items-center gap-2.5 rounded-full border border-white/15 px-4 py-2 text-[0.82rem] text-white/70">

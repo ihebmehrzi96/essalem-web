@@ -2,7 +2,7 @@ import type { Category } from "./types";
 
 export const gynecologie: Category = {
   slug: "gynecologie-obstetrique",
-  image: "/images/services/gynecologie-cover.jpg",
+  image: "/images/services/gynecologie-cover1.jpg",
   title: {
     fr: "Gynécologie-Obstétrique",
     ar: "أمراض النساء والتوليد",

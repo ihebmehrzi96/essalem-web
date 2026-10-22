@@ -3,19 +3,26 @@ import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import Counter from "@/components/counter";
 import { figures, specialties } from "@/lib/content";
+import { useLocale } from "next-intl";
 
 export default function Clinic() {
   const t = useTranslations("clinic");
   const tf = useTranslations("figures");
-
+const locale = useLocale() as "fr" | "ar" | "en";
+  const names = specialties[locale];
   return (
     <>
       {/* Bandeau défilant */}
-      <div className="overflow-hidden border-y border-line py-5">
+      <div  dir="ltr" className="overflow-hidden border-y border-line py-5">
         <div className="rail-track flex w-max gap-10 whitespace-nowrap">
-          {[...specialties, ...specialties].map((name, i) => (
+          {[...names, ...names].map((name, i) => (
             <span key={`${name}-${i}`} className="flex items-center gap-10 text-stone">
-              <span className="font-display text-xl tracking-tight">{name}</span>
+              <span
+  dir={locale === "ar" ? "rtl" : "ltr"}
+  className="font-display text-xl tracking-tight"
+>
+  {name}
+</span>
               <span className="h-1 w-1 rounded-full bg-leaf" aria-hidden="true" />
             </span>
           ))}
