@@ -86,7 +86,7 @@ export const chirurgicales: Category = {
     },
     {
       slug: "chirurgie-urologique",
-      image: "/images/services/chirurgie-urologique.jpg",
+      image: "/images/services/chirurgie-urologique1.jpg",
       title: {
         fr: "Chirurgie urologique",
         ar: "جراحة المسالك البولية",
