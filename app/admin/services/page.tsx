@@ -4,7 +4,7 @@ import { getSession } from "@/lib/auth";
 import { listAllCategories } from "@/lib/services";
 import AdminHeader from "@/components/admin-header";
 
-export const instant = false;
+
 
 export default async function AdminServicesPage() {
   const session = await getSession();

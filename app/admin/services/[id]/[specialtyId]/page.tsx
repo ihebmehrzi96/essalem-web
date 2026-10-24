@@ -12,7 +12,7 @@ import SpecialtyForm from "../specialty-form";
 import { toggleSpecialty } from "../../actions";
 import DeleteSpecialtyButton from "../delete-button";
 
-export const instant = false;
+
 
 export default async function EditSpecialtyPage({
   params,

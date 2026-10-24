@@ -6,7 +6,7 @@ import AdminHeader from "@/components/admin-header";
 import DeleteButton from "./delete-button";
 import { togglePublished } from "./actions";
 
-export const instant = false;
+
 
 function formatDate(date: Date) {
   return new Intl.DateTimeFormat("en-GB", {

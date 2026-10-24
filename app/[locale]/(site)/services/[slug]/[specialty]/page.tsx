@@ -5,7 +5,7 @@ import { findSpecialty, allSpecialtyPaths, type Locale } from "@/content/service
 import { clinic } from "@/lib/content";
 import Reveal from "@/components/reveal";
 
-export const instant = false;
+
 
 export function generateStaticParams() {
   return allSpecialtyPaths();

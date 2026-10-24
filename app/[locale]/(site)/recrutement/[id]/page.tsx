@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getOfferById } from "@/lib/jobs";
 
-export const instant = false;
+
 function formatDate(date: Date) {
   return new Intl.DateTimeFormat("fr-FR", {
     day: "numeric",

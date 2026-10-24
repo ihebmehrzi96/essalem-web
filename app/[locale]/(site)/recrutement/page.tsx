@@ -2,7 +2,7 @@ import Link from "next/link";
 import { listActiveOffers } from "@/lib/jobs";
 import Reveal from "@/components/reveal";
 import Image from "next/image";
-export const instant = false;
+
 
 export const metadata = {
   title: "Recrutement — Clinique Essalem",

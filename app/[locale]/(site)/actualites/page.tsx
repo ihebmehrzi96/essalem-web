@@ -4,7 +4,7 @@ import { Link } from "@/i18n/routing";
 import { listPublishedPostsPaged } from "@/lib/posts";
 import Reveal from "@/components/reveal";
 
-export const instant = false;
+
 
 export const metadata = {
   title: "Actualités — Clinique Essalem",

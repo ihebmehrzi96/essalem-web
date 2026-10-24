@@ -3,7 +3,7 @@ import { getSession } from "@/lib/auth";
 import { getOfferById } from "@/lib/jobs";
 import EditOfferForm from "./edit-form";
 
-export const instant = false;
+
 
 export default async function EditOfferPage({
   params,

@@ -6,7 +6,7 @@ import AdminHeader from "@/components/admin-header";
 import { toggleHandledMessage } from "./actions";
 import DeleteMessageButton from "./delete-button";
 
-export const instant = false;
+
 
 function formatDate(date: Date) {
   return new Intl.DateTimeFormat("fr-FR", {

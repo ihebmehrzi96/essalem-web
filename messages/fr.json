@@ -74,5 +74,11 @@
     "allServices": "Toutes les spécialités",
     "apply": "Postuler",
     "back": "Retour"
+  },
+    "notFound": {
+    "title": "Cette page est introuvable",
+    "body": "L'adresse saisie n'existe pas ou la page a été déplacée. Vous pouvez revenir à l'accueil ou nous contacter.",
+    "home": "Retour à l'accueil",
+    "contact": "Nous contacter"
   }
 }

@@ -4,7 +4,7 @@ import SlideIn from "@/components/slide-in";
 import Reveal from "@/components/reveal";
 import { clinic } from "@/lib/content";
 import { sejour } from "@/content/sejour";
-export const instant = false;
+
 /** Visuel associé à chaque section, dans l'ordre. */
 const IMAGES = [
   "/images/sejour/visites.jpg",

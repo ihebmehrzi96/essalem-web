@@ -3,7 +3,7 @@ import Reveal from "@/components/reveal";
 import { clinic } from "@/lib/content";
 import { contact } from "@/content/contact";
 import ContactForm from "./form";
-export const instant = false;
+
 const MAP_SRC =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3234.3916896023056!2d10.618824216098437!3d35.83939798015767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13027580bf92c027%3A0xcdb5761297fc24b0!2sClinique%20Essalem%20Sousse!5e0!3m2!1sfr!2stn!4v1600960303372!5m2!1sfr!2stn";
 

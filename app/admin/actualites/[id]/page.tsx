@@ -4,7 +4,7 @@ import { getPostById } from "@/lib/posts";
 import EditForm from "./edit-form";
 
 
-export const instant = false;
+
 
 export default async function EditPostPage({
   params,

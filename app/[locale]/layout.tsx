@@ -5,7 +5,8 @@ import { setRequestLocale } from "next-intl/server";
 import { Bricolage_Grotesque, Hanken_Grotesk, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
-export const instant = false;
+import PageLoader from "@/components/page-loader";
+
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-bricolage",
@@ -56,6 +57,7 @@ export default async function LocaleLayout({
       <body
         className={`${bricolage.variable} ${hanken.variable} ${plexArabic.variable}`}
       >
+        <PageLoader />
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>

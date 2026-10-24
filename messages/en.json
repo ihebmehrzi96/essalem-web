@@ -74,5 +74,11 @@
     "allServices": "All specialties",
     "apply": "Apply",
     "back": "Back"
+  },
+    "notFound": {
+    "title": "This page could not be found",
+    "body": "The address you entered does not exist or the page has moved. You can return to the home page or contact us.",
+    "home": "Back to home",
+    "contact": "Contact us"
   }
 }

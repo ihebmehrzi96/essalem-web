@@ -4,7 +4,7 @@ import { getCategoryById, getSpecialtyById } from "@/lib/services";
 import AdminHeader from "@/components/admin-header";
 import SpecialtyForm from "../specialty-form";
 
-export const instant = false;
+
 
 export default async function NewSpecialtyPage({
   params,

@@ -5,7 +5,7 @@ import { Link } from "@/i18n/routing";
 import { getPostBySlug, listPublishedPosts } from "@/lib/posts";
 import Reveal from "@/components/reveal";
 
-export const instant = false;
+
 
 export default async function PostPage({
   params,

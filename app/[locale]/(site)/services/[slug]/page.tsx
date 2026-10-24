@@ -5,7 +5,7 @@ import { categories, getCategory, type Locale } from "@/content/services";
 import { clinic } from "@/lib/content";
 import Reveal from "@/components/reveal";
 
-export const instant = false;
+
 
 export function generateStaticParams() {
   return categories.map((c) => ({ slug: c.slug }));

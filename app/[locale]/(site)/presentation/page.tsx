@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { presentation } from "@/content/pages";
-export const instant = false;
+
 export async function generateMetadata({
   params,
 }: {

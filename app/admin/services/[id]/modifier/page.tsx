@@ -4,7 +4,7 @@ import { getCategoryById } from "@/lib/services";
 import AdminHeader from "@/components/admin-header";
 import CategoryForm from "./form";
 
-export const instant = false;
+
 
 export default async function EditCategoryPage({
   params,

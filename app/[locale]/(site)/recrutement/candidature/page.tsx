@@ -1,7 +1,7 @@
 import { listActiveOffers } from "@/lib/jobs";
 import ApplicationForm from "./form";
 
-export const instant = false;
+
 
 export const metadata = {
   title: "Candidature — Clinique Essalem",

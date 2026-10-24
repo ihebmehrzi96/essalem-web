@@ -5,7 +5,7 @@ import { listApplications } from "@/lib/jobs";
 import AdminHeader from "@/components/admin-header";
 import { toggleHandled } from "./actions";
 
-export const instant = false;
+
 
 function formatDate(date: Date) {
   return new Intl.DateTimeFormat("en-GB", {

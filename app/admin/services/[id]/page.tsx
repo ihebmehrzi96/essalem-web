@@ -7,7 +7,7 @@ import AdminHeader from "@/components/admin-header";
 import { toggleSpecialty } from "../actions";
 import DeleteSpecialtyButton from "./delete-button";
 
-export const instant = false;
+
 
 export default async function CategorySpecialtiesPage({
   params,

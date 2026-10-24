@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { qualite } from "@/content/qualite";
-export const instant = false;
+
 /** Toujours en français, quelle que soit la langue du site. */
 const CERTIFICATIONS = [
   {

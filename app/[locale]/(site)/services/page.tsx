@@ -3,7 +3,7 @@ import { Link } from "@/i18n/routing";
 import { categories, type Locale } from "@/content/services";
 import Reveal from "@/components/reveal";
 
-export const instant = false;
+
 
 export const metadata = {
   title: "Nos services — Clinique Essalem",

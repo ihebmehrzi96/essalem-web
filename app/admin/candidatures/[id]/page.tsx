@@ -5,7 +5,7 @@ import { getApplicationById } from "@/lib/jobs";
 import AdminHeader from "@/components/admin-header";
 import { deleteApplication } from "../actions";
 
-export const instant = false;
+
 
 function formatDate(date: Date | null) {
   if (!date) return "—";
