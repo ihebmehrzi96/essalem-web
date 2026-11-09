@@ -1,3 +1,6 @@
+@import url('https://api.fontshare.com/v2/css?f[]=tanker@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -11,12 +14,18 @@
   --color-stone: #5c6862;
   --color-line: #dde2db;
 
-  --font-display: var(--font-bricolage), system-ui, sans-serif;
-  --font-body: var(--font-hanken), system-ui, sans-serif;
+  --font-display: 'Tanker', 'Poppins', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-tanker: 'Tanker', 'Poppins', sans-serif;
 
   --spacing-section: clamp(5rem, 9vw, 9.5rem);
 
   --font-arabic: var(--font-plex-arabic), system-ui, sans-serif;
+}
+
+.font-tanker {
+  font-family: 'Tanker', 'Poppins', sans-serif;
+  letter-spacing: 0.03em;
 }
 
 @layer base {
@@ -26,19 +35,20 @@
     font-family: var(--font-body);
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
+  }
+
   [dir="rtl"] body,
   [dir="rtl"] h1,
   [dir="rtl"] h2,
   [dir="rtl"] h3 {
     font-family: var(--font-arabic);
   }
-  }
 
   h1, h2, h3 {
     font-family: var(--font-display);
     font-weight: 500;
-    letter-spacing: -0.028em;
-    line-height: 1.04;
+    letter-spacing: 0.02em;
+    line-height: 1.08;
   }
 
   :focus-visible {
@@ -46,6 +56,7 @@
     outline-offset: 3px;
   }
 }
+
 /* Bandeau de spécialités qui défile en continu */
 @keyframes rail {
   from { transform: translateX(0); }
@@ -63,14 +74,26 @@
 .group:hover .sheen {
   animation: sheen 900ms ease-out;
 }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
 }
-  [dir="rtl"] h1,
-  [dir="rtl"] h2,
-  [dir="rtl"] h3 {
-    line-height: 1.3;
-  }
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3 {
+  line-height: 1.3;
+}
+
+/* Masquer la barre de défilement tout en conservant le défilement */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

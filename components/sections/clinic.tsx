@@ -8,21 +8,22 @@ import { useLocale } from "next-intl";
 export default function Clinic() {
   const t = useTranslations("clinic");
   const tf = useTranslations("figures");
-const locale = useLocale() as "fr" | "ar" | "en";
+  const locale = useLocale() as "fr" | "ar" | "en";
   const names = specialties[locale];
+
   return (
     <>
       {/* Bandeau défilant */}
-      <div  dir="ltr" className="overflow-hidden border-y border-line py-5">
+      <div dir="ltr" className="overflow-hidden border-y border-line py-5">
         <div className="rail-track flex w-max gap-10 whitespace-nowrap">
           {[...names, ...names].map((name, i) => (
             <span key={`${name}-${i}`} className="flex items-center gap-10 text-stone">
               <span
-  dir={locale === "ar" ? "rtl" : "ltr"}
-  className="font-display text-xl tracking-tight"
->
-  {name}
-</span>
+                dir={locale === "ar" ? "rtl" : "ltr"}
+                className="font-display text-xl tracking-tight"
+              >
+                {name}
+              </span>
               <span className="h-1 w-1 rounded-full bg-leaf" aria-hidden="true" />
             </span>
           ))}

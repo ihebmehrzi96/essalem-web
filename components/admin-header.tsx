@@ -20,11 +20,11 @@ export default function AdminHeader({ name }: { name: string }) {
       <div className="flex flex-wrap items-center justify-between gap-6 px-6 pb-4">
         <Link href="/admin" aria-label="Administration" className="shrink-0">
           <Image
-            src="/logo-essalem.png"
+            src="/logo-essalem.svg"
             alt="Clinique Essalem"
-            width={675}
-            height={372}
-            className="h-14 w-auto"
+            width={142}
+            height={107}
+            className="h-14 w-auto object-contain"
           />
         </Link>
 

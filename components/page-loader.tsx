@@ -6,19 +6,20 @@ import { AnimatePresence, motion } from "motion/react";
 
 /**
  * Écran de chargement : s'affiche au premier chargement du site seulement,
- * puis disparaît en fondu. Durée minimale pour éviter un flash.
+ * puis disparaît en fondu. Ne réapparaît jamais lors des changements de langue.
  */
 export default function PageLoader() {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Déjà vu pendant cette session : on ne le montre pas à nouveau.
+    // Déjà vu pendant cette session : ne pas afficher du tout
     if (sessionStorage.getItem("loader-seen")) {
-      setVisible(false);
       return;
     }
 
-    const MIN_DURATION = 3000;
+    setVisible(true);
+
+    const MIN_DURATION = 2200;
     const start = performance.now();
 
     const finish = () => {
@@ -41,9 +42,9 @@ export default function PageLoader() {
     <AnimatePresence>
       {visible && (
         <motion.div
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-paper"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-paper pointer-events-auto"
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           aria-hidden="true"
         >
           <motion.div
@@ -52,12 +53,12 @@ export default function PageLoader() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
             <Image
-              src="/logo-essalem.png"
+              src="/logo-essalem.svg"
               alt=""
-              width={675}
-              height={372}
+              width={142}
+              height={107}
               priority
-              className="h-24 w-auto sm:h-28"
+              className="h-20 w-auto sm:h-24 object-contain"
             />
           </motion.div>
 

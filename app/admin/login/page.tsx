@@ -14,11 +14,11 @@ export default function LoginPage() {
       <div className="w-full max-w-md rounded-3xl bg-paper p-8 shadow-xl shadow-ink/5 sm:p-10">
 
         <Image
-          src="/logo-essalem.png"
+          src="/logo-essalem.svg"
           alt="Clinique Essalem"
-          width={675}
-          height={372}
-          className="mb-8 h-12 w-auto"
+          width={142}
+          height={107}
+          className="mb-8 h-12 w-auto object-contain"
         />
 
         <h1 className="text-3xl">Espace administration</h1>

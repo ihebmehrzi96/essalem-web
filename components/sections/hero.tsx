@@ -41,7 +41,7 @@ export default function Hero() {
 
       <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-ink/10" />
       <div className="absolute inset-0 bg-gradient-to-r from-ink/50 to-transparent rtl:bg-gradient-to-l" />
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/45 via-transparent to-transparent sm:from-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/55 via-transparent to-transparent" />
 
       <div className="absolute inset-x-0 bottom-0 px-5 pb-10 sm:px-6 sm:pb-14 md:px-12 md:pb-20">
         <div className="mx-auto max-w-[1280px]">
