@@ -40,7 +40,7 @@ export default function SiteHeader() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 24);
-      const threshold = pathname === "/" ? window.innerHeight * 0.72 : 320;
+      const threshold = pathname === "/" ? window.innerHeight * 0.98 : 320;
       setPastHero(window.scrollY > threshold);
     };
     handleScroll();

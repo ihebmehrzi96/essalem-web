@@ -6,13 +6,13 @@
 @theme {
   --color-ink: #11201a;
   --color-ink-soft: #1b2e26;
-  --color-paper: #ffffff;
-  --color-mist: #eef1ec;
-  --color-mist-deep: #dfe4dd;
-  --color-leaf: #1c8a5f;
-  --color-leaf-deep: #0f6343;
+  --color-paper: #f6f5f0;
+  --color-mist: #eceae2;
+  --color-mist-deep: #dfddd3;
+  --color-leaf: #5dc39b;
+  --color-leaf-deep: #43a982;
   --color-stone: #5c6862;
-  --color-line: #dde2db;
+  --color-line: #dbd8ce;
 
   --font-display: 'Tanker', 'Poppins', sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -62,8 +62,18 @@
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
+@keyframes rail-reverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
 .rail-track {
-  animation: rail 60s linear infinite;
+  animation: rail 145s linear infinite;
+}
+.rail-track-reverse {
+  animation: rail-reverse 42s linear infinite;
+}
+.rail-track-slow {
+  animation: rail 65s linear infinite;
 }
 
 /* Reflet qui traverse une carte au survol */

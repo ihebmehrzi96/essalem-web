@@ -133,8 +133,8 @@ export const specialties: Record<"fr" | "ar" | "en", string[]> = {
 
 export const figures = [
   { value: 20, suffix: "+", key: "years" },
-  { value: 0, suffix: "", key: "specialties", todo: true },
-  { value: 0, suffix: "", key: "beds", todo: true },
+  { value: 22, suffix: "", key: "specialties" },
+  { value: 120, suffix: "+", key: "beds" },
   { value: 24, suffix: "h/24", key: "emergency" },
 ];
 

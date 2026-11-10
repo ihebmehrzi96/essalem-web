@@ -26,7 +26,16 @@ export function News({ posts }: { posts: NewsPost[] }) {
     }).format(date);
 
   return (
-    <section id="actualites" className="px-5 py-(--spacing-section) sm:px-6 md:px-12">
+    <section id="actualites" className="px-5 pb-(--spacing-section) sm:px-6 md:px-12">
+      {/* Séparation architecturale avec la section précédente */}
+      <div className="mx-auto mb-14 flex max-w-[1280px] items-center gap-4 sm:mb-20">
+        <span className="h-px flex-1 bg-[#5DC39B]/55" />
+        <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[#5DC39B] bg-paper text-xs text-[#5DC39B]">
+          ✦
+        </span>
+        <span className="h-px flex-1 bg-[#5DC39B]/55" />
+      </div>
+
       <div className="mx-auto max-w-[1280px]">
 
         <Reveal>
@@ -34,7 +43,7 @@ export function News({ posts }: { posts: NewsPost[] }) {
             <h2 className="text-[clamp(2rem,4.4vw,3.4rem)]">{t("heading")}</h2>
             <Link
               href="/actualites"
-              className="group inline-flex min-h-11 items-center gap-3 rounded-full border border-line px-5 font-medium transition-colors hover:border-ink"
+              className="group inline-flex min-h-11 items-center gap-3 rounded-full border border-[#5DC39B] px-5 font-medium transition-colors hover:bg-[#5DC39B] hover:text-paper"
             >
               {t("all")}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-500 group-hover:translate-x-1 rtl:-scale-x-100" aria-hidden="true">
@@ -49,13 +58,13 @@ export function News({ posts }: { posts: NewsPost[] }) {
             <Reveal key={post.id} delay={i * 0.09}>
               <Link
                 href={`/actualites/${post.slug}`}
-                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-paper transition-all duration-500 hover:-translate-y-1.5 hover:border-ink/20 hover:shadow-xl hover:shadow-ink/8"
+                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#5DC39B]/65 bg-paper transition-all duration-500 hover:-translate-y-1.5 hover:border-[#5DC39B] hover:shadow-xl hover:shadow-[#5DC39B]/15"
               >
                 <span className="pointer-events-none absolute inset-0 z-10 overflow-hidden rounded-2xl">
                   <span className="sheen absolute inset-y-0 -left-full w-1/3 bg-gradient-to-r from-transparent via-white/45 to-transparent" />
                 </span>
 
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-mist">
+                <div className="relative aspect-[4/3] w-full overflow-hidden border-b border-[#5DC39B]/40 bg-mist">
                   {post.image ? (
                     <Image
                       src={post.image}
@@ -88,7 +97,7 @@ export function News({ posts }: { posts: NewsPost[] }) {
                     <span className="text-[0.9rem] font-medium text-leaf-deep">
                       {t("seeMore")}
                     </span>
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full border border-line transition-all duration-500 group-hover:border-ink group-hover:bg-ink">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#5DC39B] bg-paper/60 transition-all duration-500 group-hover:border-[#5DC39B] group-hover:bg-[#5DC39B]">
                       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-stone transition-all duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-paper rtl:-scale-x-100" aria-hidden="true">
                         <path d="M7 17 17 7" /><path d="M8 7h9v9" />
                       </svg>
