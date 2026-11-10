@@ -59,9 +59,14 @@
   "news": {
     "heading": "Actualités",
     "all": "Toutes les actualités",
-    "seeMore": "Voir plus"
+    "seeMore": "Voir plus",
+    "empty": "Aucune actualité publiée pour le moment."
   },
   "footer": {
+    "clinicName": "Clinique Essalem",
+    "addressLine1": "Place du Maghreb Arabe",
+    "addressLine2": "4000, Sousse — Tunisie",
+    "cityCountry": "Sousse, Tunisie",
     "services": "Nos services",
     "keepInTouch": "Restons en contact",
     "review": "Donner votre avis",
@@ -75,7 +80,7 @@
     "apply": "Postuler",
     "back": "Retour"
   },
-    "notFound": {
+  "notFound": {
     "title": "Cette page est introuvable",
     "body": "L'adresse saisie n'existe pas ou la page a été déplacée. Vous pouvez revenir à l'accueil ou nous contacter.",
     "home": "Retour à l'accueil",

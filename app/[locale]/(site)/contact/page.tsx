@@ -32,7 +32,6 @@ export default async function ContactPage({
 
   return (
     <main className="pb-(--spacing-section)">
-
       <section className="px-5 pt-32 pb-14 sm:px-8 md:pt-44">
         <div className="mx-auto max-w-[1150px]">
           <span className="text-[0.8rem] tracking-[0.24em] text-leaf uppercase">
@@ -49,7 +48,6 @@ export default async function ContactPage({
 
       <div className="mx-auto max-w-[1150px] px-5 sm:px-8">
         <div className="grid gap-12 lg:grid-cols-[1fr_minmax(0,0.75fr)] lg:gap-16">
-
           <Reveal>
             <ContactForm t={page.form} />
           </Reveal>
@@ -83,11 +81,11 @@ export default async function ContactPage({
                   {page.aside.address}
                 </h2>
                 <p className="mt-5 leading-[1.9] text-paper/70">
-                  Place du Maghreb Arabe
+                  {page.aside.addressLines[0]}
                   <br />
-                  4000, Sousse
+                  {page.aside.addressLines[1]}
                   <br />
-                  Tunisie
+                  {page.aside.addressLines[2]}
                 </p>
               </div>
 
@@ -129,7 +127,6 @@ export default async function ContactPage({
               </div>
             </aside>
           </Reveal>
-
         </div>
       </div>
 

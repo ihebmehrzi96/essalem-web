@@ -12,6 +12,7 @@ import { menuStore } from "@/lib/menu-store";
 
 export default function SiteHeader() {
   const t = useTranslations("nav");
+  const tf = useTranslations("footer");
   const pathname = usePathname();
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -385,7 +386,7 @@ export default function SiteHeader() {
 
         {/* Subtle footer credit inside menu */}
         <div className="text-center text-[11px] sm:text-[12px] text-zinc-400 font-mono tracking-wider uppercase pb-1 relative z-10 shrink-0">
-          Clinique Essalem — Sousse, Tunisie
+          {tf("clinicName")} — {tf("cityCountry")}
         </div>
       </nav>
     </>

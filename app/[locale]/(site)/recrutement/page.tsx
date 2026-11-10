@@ -1,45 +1,168 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { listActiveOffers } from "@/lib/jobs";
 import Reveal from "@/components/reveal";
 import Image from "next/image";
+import type { Locale } from "@/content/services";
 
+type Props = { params: Promise<{ locale: string }> };
 
-export const metadata = {
-  title: "Recrutement — Clinique Essalem",
-  description:
-    "Consultez les offres d'emploi de la Clinique Essalem à Sousse et postulez en ligne.",
+const copy: Record<
+  Locale,
+  {
+    metaTitle: string;
+    metaDescription: string;
+    noOpenOffersBadge: string;
+    openPositionsBadge: (count: number) => string;
+    heroTitle: string;
+    heroIntro: string;
+    seeOffers: string;
+    spontaneousApp: string;
+    values: { title: string; body: string }[];
+    openOffersHeading: string;
+    noOpenOffersBody: string;
+    refPrefix: string;
+    publishedOn: string;
+    ctaTitle: string;
+    ctaBody: string;
+    ctaButton: string;
+  }
+> = {
+  fr: {
+    metaTitle: "Recrutement — Clinique Essalem",
+    metaDescription:
+      "Consultez les offres d'emploi de la Clinique Essalem à Sousse et postulez en ligne.",
+    noOpenOffersBadge: "Aucune offre ouverte actuellement",
+    openPositionsBadge: (count) =>
+      `${count} poste${count > 1 ? "s" : ""} à pourvoir`,
+    heroTitle: "Construisons la suite ensemble",
+    heroIntro:
+      "La Clinique Essalem recrute des professionnels engagés, soucieux de la qualité des soins et du bien-être des patients.",
+    seeOffers: "Voir les offres",
+    spontaneousApp: "Candidature spontanée",
+    values: [
+      {
+        title: "Des équipes qui durent",
+        body: "Beaucoup de nos collaborateurs sont là depuis plus de dix ans. La stabilité des équipes fait la qualité des soins.",
+      },
+      {
+        title: "Un plateau technique complet",
+        body: "Imagerie, laboratoire, blocs opératoires : vous travaillez avec les moyens nécessaires à votre métier.",
+      },
+      {
+        title: "Au cœur de Sousse",
+        body: "Place du Maghreb Arabe, accessible et bien desservie, dans l'un des quartiers les plus vivants de la ville.",
+      },
+    ],
+    openOffersHeading: "Nos offres ouvertes",
+    noOpenOffersBody:
+      "Aucune offre n'est ouverte pour le moment. Vous pouvez néanmoins nous adresser une candidature spontanée : elle sera conservée et étudiée dès qu'un poste correspondra à votre profil.",
+    refPrefix: "Réf.",
+    publishedOn: "Publiée le",
+    ctaTitle: "Aucune offre ne correspond à votre profil ?",
+    ctaBody:
+      "Envoyez-nous votre dossier. Il sera étudié par notre service des ressources humaines et conservé pour nos futurs recrutements.",
+    ctaButton: "Déposer ma candidature",
+  },
+  ar: {
+    metaTitle: "الانتداب — مصحة السلام",
+    metaDescription:
+      "اطّلعوا على عروض الشغل بمصحة السلام بسوسة وقدّموا ترشّحكم عبر الإنترنت.",
+    noOpenOffersBadge: "لا توجد عروض مفتوحة حالياً",
+    openPositionsBadge: (count) =>
+      count === 1 ? "خطّة واحدة شاغرة" : `${count} خطط شاغرة`,
+    heroTitle: "لنبني المستقبل معاً",
+    heroIntro:
+      "تنتدب مصحة السلام كفاءات مهنية ملتزمة، حريصة على جودة الرعاية الصحية وراحة المرضى.",
+    seeOffers: "عرض الوظائف المتاحة",
+    spontaneousApp: "ترشّح تلقائي",
+    values: [
+      {
+        title: "فرق عمل مستقرّة",
+        body: "يعمل العديد من إطاراتنا وأعواننا بالمصحة منذ أكثر من عشر سنوات؛ فاستقرار الفرق هو أساس جودة الرعاية.",
+      },
+      {
+        title: "منصّة تقنية متكاملة",
+        body: "تصوير طبي، مخابر، وقاعات عمليات مجهّزة بأحدث الوسائل الضرورية لممارسة مهنتكم في أفضل الظروف.",
+      },
+      {
+        title: "في قلب مدينة سوسة",
+        body: "ساحة المغرب العربي، موقع يسهل الوصول إليه في أحد أكثر أحياء المدينة حيويةً.",
+      },
+    ],
+    openOffersHeading: "عروض الشغل المتاحة",
+    noOpenOffersBody:
+      "لا توجد عروض شغل مفتوحة في الوقت الحالي. يمكنكم مع ذلك إرسال ترشّح تلقائي؛ سيتمّ الاحتفاظ بملفّكم ودراسته فور توفّر خطّة تتوافق مع مؤهّلاتكم.",
+    refPrefix: "المرجع",
+    publishedOn: "نُشر في",
+    ctaTitle: "لا يوجد عرض يتوافق مع مؤهّلاتكم؟",
+    ctaBody:
+      "أرسلوا إلينا ملفّ ترشّحكم. ستتمّ دراسته من قِبل مصلحة الموارد البشرية والاحتفاظ به لعمليات الانتداب القادمة.",
+    ctaButton: "إيداع ملفّ الترشّح",
+  },
+  en: {
+    metaTitle: "Careers — Clinique Essalem",
+    metaDescription:
+      "Browse job openings at Clinique Essalem in Sousse and apply online.",
+    noOpenOffersBadge: "No open positions at the moment",
+    openPositionsBadge: (count) =>
+      `${count} open position${count > 1 ? "s" : ""}`,
+    heroTitle: "Let's build the future together",
+    heroIntro:
+      "Clinique Essalem recruits dedicated healthcare professionals committed to quality care and patient well-being.",
+    seeOffers: "View open positions",
+    spontaneousApp: "Spontaneous application",
+    values: [
+      {
+        title: "Long-standing teams",
+        body: "Many of our team members have been with us for over ten years. Team stability is the foundation of quality care.",
+      },
+      {
+        title: "A complete technical platform",
+        body: "Medical imaging, laboratory, operating rooms: you work with all the modern equipment required for your profession.",
+      },
+      {
+        title: "In the heart of Sousse",
+        body: "Located at Place du Maghreb Arabe, easily accessible and well connected in one of the city's most vibrant districts.",
+      },
+    ],
+    openOffersHeading: "Open positions",
+    noOpenOffersBody:
+      "There are no open positions at the moment. However, you may submit a spontaneous application: your file will be kept on record and reviewed as soon as a matching position becomes available.",
+    refPrefix: "Ref.",
+    publishedOn: "Published on",
+    ctaTitle: "No position matches your profile?",
+    ctaBody:
+      "Send us your application. It will be reviewed by our Human Resources department and kept on file for future openings.",
+    ctaButton: "Submit my application",
+  },
 };
 
-function formatDate(date: Date) {
-  return new Intl.DateTimeFormat("fr-FR", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }).format(date);
+export async function generateMetadata({ params }: Props) {
+  const { locale } = await params;
+  const c = copy[(locale as Locale) ?? "fr"] ?? copy.fr;
+  return {
+    title: c.metaTitle,
+    description: c.metaDescription,
+  };
 }
 
-const values = [
-  {
-    title: "Des équipes qui durent",
-    body: "Beaucoup de nos collaborateurs sont là depuis plus de dix ans. La stabilité des équipes fait la qualité des soins.",
-  },
-  {
-    title: "Un plateau technique complet",
-    body: "Imagerie, laboratoire, blocs opératoires : vous travaillez avec les moyens nécessaires à votre métier.",
-  },
-  {
-    title: "Au cœur de Sousse",
-    body: "Place du Maghreb Arabe, accessible et bien desservie, dans l'un des quartiers les plus vivants de la ville.",
-  },
-];
-
-export default async function RecrutementPage() {
+export default async function RecrutementPage({ params }: Props) {
+  const { locale } = await params;
+  const loc = ((locale as Locale) ?? "fr") in copy ? (locale as Locale) : "fr";
+  const c = copy[loc];
   const offers = await listActiveOffers();
+
+  const formatDate = (date: Date) =>
+    new Intl.DateTimeFormat(loc === "ar" ? "ar-TN" : loc === "en" ? "en-GB" : "fr-FR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(date);
 
   return (
     <>
       {/* Héro */}
-        <section className="relative overflow-hidden bg-ink px-5 pt-36 pb-20 sm:px-6 md:px-12 md:pt-48 md:pb-28">
+      <section className="relative overflow-hidden bg-ink px-5 pt-36 pb-20 sm:px-6 md:px-12 md:pt-48 md:pb-28">
         {/* Image de couverture */}
         <Image
           src="/images/recrutement-cover.jpg"
@@ -59,17 +182,16 @@ export default async function RecrutementPage() {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-leaf" />
             </span>
             {offers.length === 0
-              ? "Aucune offre ouverte actuellement"
-              : `${offers.length} poste${offers.length > 1 ? "s" : ""} à pourvoir`}
+              ? c.noOpenOffersBadge
+              : c.openPositionsBadge(offers.length)}
           </span>
 
           <h1 className="mt-7 max-w-[16ch] text-[clamp(2.4rem,6.5vw,5rem)] text-paper">
-            Construisons la suite ensemble
+            {c.heroTitle}
           </h1>
 
           <p className="mt-6 max-w-[54ch] text-[1.08rem] leading-relaxed text-white/60">
-            La Clinique Essalem recrute des professionnels engagés, soucieux de
-            la qualité des soins et du bien-être des patients.
+            {c.heroIntro}
           </p>
 
           <div className="mt-9 flex flex-wrap gap-3">
@@ -77,13 +199,13 @@ export default async function RecrutementPage() {
               href="#offres"
               className="inline-flex min-h-13 items-center rounded-full bg-paper px-7 font-medium text-ink transition-transform hover:-translate-y-0.5"
             >
-              Voir les offres
+              {c.seeOffers}
             </a>
             <Link
               href="/recrutement/candidature"
               className="inline-flex min-h-13 items-center rounded-full border border-white/25 px-7 font-medium text-paper transition-colors hover:bg-white/10"
             >
-              Candidature spontanée
+              {c.spontaneousApp}
             </Link>
           </div>
         </div>
@@ -93,7 +215,7 @@ export default async function RecrutementPage() {
       <section className="px-5 py-(--spacing-section) sm:px-6 md:px-12">
         <div className="mx-auto max-w-[1280px]">
           <div className="grid gap-px overflow-hidden rounded-3xl bg-line md:grid-cols-3">
-            {values.map((value, i) => (
+            {c.values.map((value, i) => (
               <Reveal key={value.title} delay={i * 0.08}>
                 <div className="h-full bg-paper p-8 md:p-9">
                   <h2 className="text-[1.25rem] leading-snug">{value.title}</h2>
@@ -110,20 +232,16 @@ export default async function RecrutementPage() {
       {/* Offres */}
       <section id="offres" className="bg-mist px-5 py-(--spacing-section) sm:px-6 md:px-12">
         <div className="mx-auto max-w-[1280px]">
-
           <Reveal>
             <h2 className="text-[clamp(1.9rem,4vw,3rem)]">
-              Nos offres ouvertes
+              {c.openOffersHeading}
             </h2>
           </Reveal>
 
           {offers.length === 0 ? (
             <div className="mt-10 rounded-3xl bg-paper p-10">
               <p className="max-w-[52ch] leading-relaxed text-stone">
-                Aucune offre n&apos;est ouverte pour le moment. Vous pouvez
-                néanmoins nous adresser une candidature spontanée&nbsp;: elle
-                sera conservée et étudiée dès qu&apos;un poste correspondra à
-                votre profil.
+                {c.noOpenOffersBody}
               </p>
             </div>
           ) : (
@@ -137,18 +255,22 @@ export default async function RecrutementPage() {
                     >
                       {/* Barre d'accent qui se déploie au survol */}
                       <span
-                        className="absolute inset-y-0 left-0 w-1 origin-top scale-y-0 bg-leaf transition-transform duration-500 group-hover:scale-y-100"
+                        className="absolute inset-y-0 start-0 w-1 origin-top scale-y-0 bg-leaf transition-transform duration-500 group-hover:scale-y-100"
                         aria-hidden="true"
                       />
 
                       <div className="min-w-[220px] flex-1">
-                        <h3 className="text-[clamp(1.25rem,2.1vw,1.7rem)] leading-snug transition-transform duration-500 group-hover:translate-x-2">
+                        <h3 className="text-[clamp(1.25rem,2.1vw,1.7rem)] leading-snug transition-transform duration-500 group-hover:translate-x-2 rtl:group-hover:-translate-x-2">
                           {offer.title}
                         </h3>
-                        <div className="mt-2 flex flex-wrap items-center gap-3 text-[0.86rem] text-stone transition-transform duration-500 group-hover:translate-x-2">
-                          <span>Réf. {offer.ref}</span>
+                        <div className="mt-2 flex flex-wrap items-center gap-3 text-[0.86rem] text-stone transition-transform duration-500 group-hover:translate-x-2 rtl:group-hover:-translate-x-2">
+                          <span>
+                            {c.refPrefix} {offer.ref}
+                          </span>
                           <span aria-hidden="true">·</span>
-                          <span>Publiée le {formatDate(offer.createdAt)}</span>
+                          <span>
+                            {c.publishedOn} {formatDate(offer.createdAt)}
+                          </span>
                         </div>
                       </div>
 
@@ -162,7 +284,7 @@ export default async function RecrutementPage() {
                           strokeWidth="1.8"
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          className="text-stone transition-all duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-paper"
+                          className="text-stone transition-all duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-paper rtl:-scale-x-100"
                           aria-hidden="true"
                         >
                           <path d="M7 17 17 7" />
@@ -175,7 +297,6 @@ export default async function RecrutementPage() {
               ))}
             </ul>
           )}
-
         </div>
       </section>
 
@@ -185,11 +306,10 @@ export default async function RecrutementPage() {
           <div className="flex flex-wrap items-center justify-between gap-8 rounded-3xl border border-line p-8 sm:p-12">
             <div>
               <h2 className="max-w-[20ch] text-[clamp(1.6rem,3.2vw,2.4rem)]">
-                Aucune offre ne correspond à votre profil&nbsp;?
+                {c.ctaTitle}
               </h2>
               <p className="mt-4 max-w-[48ch] leading-relaxed text-stone">
-                Envoyez-nous votre dossier. Il sera étudié par notre service des
-                ressources humaines et conservé pour nos futurs recrutements.
+                {c.ctaBody}
               </p>
             </div>
 
@@ -197,9 +317,21 @@ export default async function RecrutementPage() {
               href="/recrutement/candidature"
               className="group inline-flex min-h-13 shrink-0 items-center gap-3 rounded-full bg-ink px-8 font-medium text-paper transition-colors hover:bg-leaf-deep"
             >
-              Déposer ma candidature
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-500 group-hover:translate-x-1" aria-hidden="true">
-                <path d="M5 12h14" /><path d="m13 6 6 6-6 6" />
+              {c.ctaButton}
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="transition-transform duration-500 group-hover:translate-x-1 rtl:-scale-x-100 rtl:group-hover:-translate-x-1"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path d="m13 6 6 6-6 6" />
               </svg>
             </Link>
           </div>

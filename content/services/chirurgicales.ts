@@ -108,8 +108,8 @@ export const chirurgicales: Category = {
       },
       body: {
         fr: "La chirurgie digestive est la spécialité chirurgicale relative au traitement des pathologies de l'appareil digestif (œsophage, estomac, intestin, colon, rectum, foie, vésicule biliaire, pancréas…) et de la paroi abdominale (hernies, éventrations).\n\nActivité développée au sein de notre établissement, la chirurgie digestive se pratique dans un contexte sécuritaire assuré grâce à l'expérience de nos chirurgiens rompus aux différentes techniques chirurgicales et à un plateau technique très riche.",
-        ar: "جراحة الجهاز الهضمي اختصاص جراحي يهتمّ بعلاج أمراض أعضاء الجهاز الهضمي (المريء والمعدة والأمعاء والقولون والمستقيم والكبد والمرارة والقنوات الصفراوية والبنكرياس…) والجدران العضلية للبطن (الفتق، التقرّحات). وتُجرى التدخّلات الجراحية في ظروف آمنة بفضل الخبرة التي يكتسبها أطبّاؤنا الجراحون وبفضل تجهيزات فنية عالية الجودة.",
-        en: "Digestive surgery is the surgical specialty related to the treatment of pathologies of the digestive system (esophagus, stomach, intestine, colon, rectum, liver, gall bladder, pancreas…) and the abdominal wall (hernias, venting).\n\nAn advanced service within our establishment, digestive surgery is practiced in a safe context thanks to the experience of our surgeons experienced in different surgical techniques and a very rich technical platform.",
+        ar: "جراحة الجهاز الهضمي اختصاص جراحي يهتمّ بعلاج أمراض أعضاء الجهاز الهضمي (المريء والمعدة والأمعاء والقولون والمستقيم والكبد والمرارة والقنوات الصفراوية والبنكرياس…) والجدار العضلي للبطن (الفتق والفتق الجراحي). وتُجرى التدخّلات الجراحية في ظروف آمنة بفضل الخبرة الواسعة التي يتمتّع بها أطبّاؤنا الجراحون وبفضل تجهيزات تقنية عالية الجودة.",
+        en: "Digestive surgery is the surgical specialty related to the treatment of pathologies of the digestive system (esophagus, stomach, intestine, colon, rectum, liver, gallbladder, pancreas…) and the abdominal wall (hernias, incisional hernias).\n\nAn advanced service within our establishment, digestive surgery is practiced in a safe environment thanks to the experience of our surgeons skilled in various surgical techniques and a comprehensive technical platform.",
       },
     },
     {
@@ -145,7 +145,7 @@ export const chirurgicales: Category = {
           image: "/images/services/chirurgie-silhouette.jpg",
           title: {
             fr: "Chirurgie de la silhouette",
-            ar: "جراحة تقويم وتعديل خيال الجسد",
+            ar: "جراحة نحت القوام وتنسيق الجسم",
             en: "Silhouette surgery",
           },
           body: {
@@ -164,7 +164,7 @@ export const chirurgicales: Category = {
           },
           body: {
             fr: "Les rides du visage consécutives au vieillissement de la peau peuvent être des rides de déshydratation ou des rides d'expression. Nos chirurgiens esthéticiens et plasticiens de renom sont habilités à traiter ces rides par des injections de botox (toxines botuliques) ou d'acide hyaluronique. Ces injections, par un effet de relâchement musculaire, permettront l'élimination de ces rides.\n\n— Régénérer la peau est aussi possible grâce aux injections de PRP ou « Plasma Riche en Plaquettes », prélevé du patient lui-même par une simple prise de sang. Ces injections sont couramment pratiquées dans notre établissement.\n— D'autres actes sont pratiqués et on cite les peelings du visage pour retirer les couches superficielles de la peau et les cicatrices ainsi que les taches brunes et les acnés.\n— Les traitements au laser sont réservés aux épilations, cicatrices, détatouage et au skin tightening ou traitement du relâchement cutané.",
-            ar: "تجاعيد الوجه الناتجة عن شيخوخة الجلد يمكن أن تكون خطوط جفاف أو خطوط تعبير. يُسمح لجراحي التجميل المشهورين لدينا بعلاج هذه التجاعيد بحقن البوتوكس (سموم البوتولينوم) أو حمض الهيالورونيك. هذه الحقن، من خلال تأثير استرخاء العضلات، ستسمح بالتخلّص من هذه التجاعيد.\n\n— تجديد الجلد ممكن أيضاً بفضل حقن البلازما الغنية بالصفائح الدموية، المأخوذة من المريض نفسه عن طريق فحص دم بسيط.\n— يتمّ القيام بأعمال أخرى تشمل تقشير الوجه لإزالة الطبقات السطحية من الجلد والندبات، وكذلك البقع الداكنة وحبّ الشباب.\n— العلاج بالليزر مخصّص لإزالة الشعر والندبات وإزالة الوشم وشدّ الجلد أو علاج الجلد المترهّل.",
+            ar: "تجاعيد الوجه الناتجة عن شيخوخة الجلد يمكن أن تكون خطوط جفاف أو خطوط تعبير. يتولّى جراحو التجميل ذوو الخبرة لدينا علاج هذه التجاعيد بحقن البوتوكس (توكسين البوتولينوم) أو حمض الهيالورونيك. هذه الحقن، من خلال تأثير إرخاء العضلات، تسمح بالتخلّص من هذه التجاعيد.\n\n— تجديد الجلد ممكن أيضاً بفضل حقن البلازما الغنية بالصفائح الدموية (PRP)، المأخوذة من المريض نفسه عن طريق سحب دم بسيط.\n— يتمّ القيام بإجراءات أخرى تشمل تقشير الوجه لإزالة الطبقات السطحية من الجلد والندبات، وكذلك البقع الداكنة وحبّ الشباب.\n— العلاج بالليزر مخصّص لإزالة الشعر والندبات وإزالة الوشم وشدّ الجلد أو علاج ترهّل البشرة.",
             en: "Facial wrinkles resulting from skin aging can be dehydration lines or expression lines. Our well-known cosmetic and plastic surgeons are qualified to treat these wrinkles with injections of Botox (botulinum toxins) or hyaluronic acid. These injections, by a muscular relaxation effect, will allow the elimination of these wrinkles.\n\n— Regenerating your skin is also possible thanks to injections of PRP or « Plasma Rich in Platelets », taken from the patient himself by a simple blood test. These injections are commonly practiced in our establishment.\n— Other procedures are also performed, such as facial peels to remove superficial layers of skin and scars as well as brown spots and acne.\n— Laser treatments are reserved for hair removal, scars, tattoo removal and skin tightening or skin sagging treatment.",
           },
         },

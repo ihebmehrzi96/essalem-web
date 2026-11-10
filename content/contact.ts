@@ -24,6 +24,7 @@ export type ContactContent = {
   aside: {
     contact: string;
     address: string;
+    addressLines: [string, string, string];
     social: string;
   };
 };
@@ -33,7 +34,7 @@ export const contact: Record<Locale, ContactContent> = {
     eyebrow: "Nous écrire",
     title: "Contact",
     intro:
-      "Si vous souhaitez obtenir d'amples informations, veuillez nous contacter en remplissant le formulaire suivant. Nous nous engageons à vous répondre dans les plus brefs délais.",
+      "Si vous souhaitez obtenir de plus amples informations, veuillez nous contacter en remplissant le formulaire suivant. Nous nous engageons à vous répondre dans les plus brefs délais.",
     form: {
       name: "Votre nom",
       email: "E-mail",
@@ -51,6 +52,7 @@ export const contact: Record<Locale, ContactContent> = {
     aside: {
       contact: "Contact",
       address: "Clinique Essalem",
+      addressLines: ["Place du Maghreb Arabe", "4000, Sousse", "Tunisie"],
       social: "Social",
     },
   },
@@ -59,7 +61,7 @@ export const contact: Record<Locale, ContactContent> = {
     eyebrow: "راسلنا",
     title: "اتصل بنا",
     intro:
-      "إذا كنت ترغب في مزيد من المعلومات، يرجى الاتصال بنا عن طريق ملء النموذج التالي. نحن ملتزمون بالإجابة في أقرب وقت ممكن.",
+      "إذا كنتم ترغبون في الحصول على مزيد من المعلومات، يرجى الاتصال بنا عن طريق ملء النموذج التالي. نحن ملتزمون بالردّ عليكم في أقرب الآجال.",
     form: {
       name: "الاسم",
       email: "البريد الإلكتروني",
@@ -77,6 +79,7 @@ export const contact: Record<Locale, ContactContent> = {
     aside: {
       contact: "اتصل بنا",
       address: "مصحة السلام",
+      addressLines: ["ساحة المغرب العربي", "4000، سوسة", "تونس"],
       social: "تابعنا",
     },
   },
@@ -85,7 +88,7 @@ export const contact: Record<Locale, ContactContent> = {
     eyebrow: "Write to us",
     title: "Contact us",
     intro:
-      "If you would like more information, please contact us by filling out this form. We promise to contact you as soon as possible.",
+      "If you would like further information, please contact us by filling out the form below. We are committed to replying as soon as possible.",
     form: {
       name: "Your name",
       email: "E-mail",
@@ -103,6 +106,7 @@ export const contact: Record<Locale, ContactContent> = {
     aside: {
       contact: "Contact",
       address: "Clinique Essalem",
+      addressLines: ["Place du Maghreb Arabe", "4000, Sousse", "Tunisia"],
       social: "Social",
     },
   },

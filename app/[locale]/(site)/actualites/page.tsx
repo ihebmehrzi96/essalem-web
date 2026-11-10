@@ -60,7 +60,7 @@ export default async function ActualitesPage({
       <div className="mx-auto max-w-[1150px] px-5 sm:px-8">
         {posts.length === 0 ? (
           <p className="bg-mist p-10 text-stone">
-            Aucune actualité publiée pour le moment.
+            {t("empty")}
           </p>
         ) : (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
