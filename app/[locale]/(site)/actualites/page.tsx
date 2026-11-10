@@ -4,8 +4,6 @@ import { Link } from "@/i18n/routing";
 import { listPublishedPostsPaged } from "@/lib/posts";
 import Reveal from "@/components/reveal";
 
-
-
 export const metadata = {
   title: "Actualités — Clinique Essalem",
   description:
@@ -37,22 +35,29 @@ export default async function ActualitesPage({
     }).format(date);
 
   return (
-    <main className="pb-(--spacing-section)">
-
-      {/* En-tête */}
-      <section className="px-5 pt-32 pb-14 sm:px-8 md:pt-44">
-        <div className="mx-auto max-w-[1150px]">
-          <span className="text-[0.8rem] tracking-[0.24em] text-leaf uppercase">
-            {t("heading")}
-          </span>
-          <h1 className="mt-4 max-w-[16ch] text-[clamp(2.4rem,6.5vw,5rem)] leading-[0.98]">
+    <div className="pb-(--spacing-section)">
+      {/* En-tête centré avec séparation (comme Nos services) */}
+      <section className="px-5 pt-32 pb-12 sm:px-8 md:pt-44 md:pb-14">
+        <div className="mx-auto max-w-[1150px] text-center">
+          <h1 className="text-[clamp(2.4rem,6.5vw,5rem)] leading-[0.98]">
             {t("heading")}
           </h1>
+
+          {/* Séparation architecturale centrée */}
+          <div
+            aria-hidden="true"
+            className="mt-8 flex items-center justify-center gap-4 sm:mt-10"
+          >
+            <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#5DC39B]/55 to-[#5DC39B]" />
+            <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[#5DC39B]/60 bg-white text-[0.7rem] text-[#5DC39B] shadow-2xs">
+              ✦
+            </span>
+            <span className="h-px flex-1 bg-gradient-to-l from-transparent via-[#5DC39B]/55 to-[#5DC39B]" />
+          </div>
         </div>
       </section>
 
       <div className="mx-auto max-w-[1150px] px-5 sm:px-8">
-
         {posts.length === 0 ? (
           <p className="bg-mist p-10 text-stone">
             Aucune actualité publiée pour le moment.
@@ -63,9 +68,9 @@ export default async function ActualitesPage({
               <Reveal key={post.id} delay={(i % 3) * 0.08}>
                 <Link
                   href={`/actualites/${post.slug}`}
-                  className="group flex h-full flex-col overflow-hidden border border-line bg-paper transition-all duration-500 hover:-translate-y-1.5 hover:border-ink/20 hover:shadow-xl hover:shadow-ink/8"
+                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#5DC39B]/45 bg-paper shadow-sm shadow-ink/4 transition-all duration-500 hover:-translate-y-1.5 hover:border-[#5DC39B] hover:shadow-xl hover:shadow-ink/8"
                 >
-                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-mist">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden border-b border-[#5DC39B]/35 bg-mist">
                     {post.image ? (
                       <Image
                         src={post.image}
@@ -80,7 +85,7 @@ export default async function ActualitesPage({
                       </span>
                     )}
 
-                    <span className="absolute start-3 top-3 bg-paper/90 px-3 py-1 text-[0.74rem] text-ink backdrop-blur-sm">
+                    <span className="absolute start-3 top-3 rounded-full bg-paper/90 px-3 py-1 text-[0.74rem] text-ink backdrop-blur-sm">
                       {post.kind}
                     </span>
                   </div>
@@ -98,9 +103,21 @@ export default async function ActualitesPage({
                       <span className="text-[0.9rem] font-medium text-leaf-deep">
                         {t("seeMore")}
                       </span>
-                      <span className="flex h-9 w-9 items-center justify-center rounded-full border border-line transition-all duration-500 group-hover:border-ink group-hover:bg-ink">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-stone transition-all duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-paper rtl:-scale-x-100" aria-hidden="true">
-                          <path d="M7 17 17 7" /><path d="M8 7h9v9" />
+                      <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#5DC39B]/55 transition-all duration-500 group-hover:border-[#5DC39B] group-hover:bg-[#5DC39B]">
+                        <svg
+                          width="15"
+                          height="15"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="text-[#5DC39B] transition-all duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white rtl:-scale-x-100"
+                          aria-hidden="true"
+                        >
+                          <path d="M7 17 17 7" />
+                          <path d="M8 7h9v9" />
                         </svg>
                       </span>
                     </span>
@@ -130,8 +147,7 @@ export default async function ActualitesPage({
             ))}
           </nav>
         )}
-
       </div>
-    </main>
+    </div>
   );
 }

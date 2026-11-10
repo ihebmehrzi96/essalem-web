@@ -5,8 +5,6 @@ import { categories, getCategory, type Locale } from "@/content/services";
 import { clinic } from "@/lib/content";
 import Reveal from "@/components/reveal";
 
-
-
 export function generateStaticParams() {
   return categories.map((c) => ({ slug: c.slug }));
 }
@@ -40,37 +38,35 @@ export default async function CategoryPage({
   const isSimple = Boolean(category.body);
 
   return (
-    <main className="pb-(--spacing-section)">
-
+    <div className="pb-(--spacing-section)">
       {/* Bandeau */}
       <div className="relative h-[64svh] min-h-[340px] w-full bg-ink-soft">
         {category.image && (
           <Image
             src={category.image}
-            alt=""
+            alt={category.title[l]}
             fill
             priority
             sizes="100vw"
             className="object-cover"
           />
         )}
-        <div className="absolute inset-0 bg-ink/20" />
+        <div className="absolute inset-0 bg-ink/25" />
       </div>
 
       {/* Titre en chevauchement */}
-      <div className="relative z-10 -mt-24 flex justify-center px-5">
-        <div className="max-w-[90%] bg-stone/80 px-12 py-8 text-center backdrop-blur-sm sm:px-20">
-          <span className="block text-[0.76rem] tracking-[0.3em] text-paper/80 uppercase">
-           {l === "ar" ? "الخدمات" : l === "en" ? "Services" : "Services"}
+      <div className="relative z-10 -mt-16 flex justify-center px-5">
+        <div className="max-w-[90%] rounded-sm bg-ink px-12 py-6 text-center sm:px-20 sm:py-7">
+          <span className="block text-[0.72rem] tracking-[0.28em] text-[#5DC39B] uppercase">
+            {l === "ar" ? "الخدمات" : "Services"}
           </span>
-          <h1 className="mt-3 text-[clamp(1.8rem,4.2vw,3rem)] leading-[1.15] text-paper">
+          <h1 className="mt-2 text-[clamp(1.6rem,3.6vw,2.6rem)] leading-[1.1] text-paper">
             {category.title[l]}
           </h1>
         </div>
       </div>
 
-      <div className="mx-auto mt-16 max-w-[1000px] px-5 sm:px-8">
-
+      <div className="mx-auto mt-16 max-w-[1150px] px-5 sm:px-8">
         {/* ───── Page simple : texte + image ───── */}
         {isSimple && category.body && (
           <div className="grid items-start gap-10 md:grid-cols-2 md:gap-12">
@@ -79,7 +75,7 @@ export default async function CategoryPage({
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-mist">
                   <Image
                     src={category.bodyImage}
-                    alt=""
+                    alt={category.title[l]}
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover"
@@ -89,9 +85,15 @@ export default async function CategoryPage({
             )}
 
             <Reveal delay={0.1}>
-              <div className={category.bodyImage ? "" : "md:col-span-2 mx-auto max-w-[62ch]"}>
-                <div className="bg-leaf px-8 py-6">
-                  <h2 className="text-[0.86rem] tracking-[0.14em] text-paper uppercase">
+              <div
+                className={
+                  category.bodyImage
+                    ? ""
+                    : "mx-auto max-w-[62ch] md:col-span-2"
+                }
+              >
+                <div className="border-s-4 border-[#5DC39B] bg-ink px-7 py-5">
+                  <h2 className="text-[0.9rem] tracking-[0.14em] text-paper uppercase">
                     {category.title[l]}
                   </h2>
                 </div>
@@ -124,51 +126,75 @@ export default async function CategoryPage({
             )}
 
             {category.specialties.length > 0 && (
-              <div className="mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-2">
-                {category.specialties.map((specialty, i) => (
-                  <Reveal key={specialty.slug} delay={(i % 2) * 0.08}>
-                    <Link
-                      href={`/services/${category.slug}/${specialty.slug}`}
-                      className="group block"
-                    >
-                      <div className="relative aspect-[16/11] w-full overflow-hidden bg-mist">
-                        {specialty.image ? (
-                          <Image
-                            src={specialty.image}
-                            alt=""
-                            fill
-                            sizes="(max-width: 640px) 100vw, 50vw"
-                            className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
-                          />
-                        ) : (
-                          <span className="flex h-full w-full items-center justify-center text-[0.85rem] text-stone">
-                            {specialty.title[l]}
-                          </span>
-                        )}
-                      </div>
+              <div className="mt-14 grid gap-4 sm:grid-cols-2">
+                {category.specialties.map((specialty, i) => {
+                  const isLastOdd =
+                    category.specialties.length % 2 === 1 &&
+                    i === category.specialties.length - 1;
 
-                      <div className="relative -mt-6 me-8 flex items-center justify-between gap-4 bg-leaf px-5 py-3.5 transition-colors duration-500 group-hover:bg-leaf-deep">
-                        <h2 className="text-[0.86rem] leading-snug tracking-[0.08em] text-paper uppercase">
-                          {specialty.title[l]}
-                        </h2>
-                        <svg
-                          width="15"
-                          height="15"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="shrink-0 text-paper opacity-0 transition-all duration-500 group-hover:translate-x-1 group-hover:opacity-100 rtl:-scale-x-100"
-                          aria-hidden="true"
+                  return (
+                    <div
+                      key={specialty.slug}
+                      className={isLastOdd ? "sm:col-span-2" : ""}
+                    >
+                      <Reveal delay={(i % 2) * 0.08}>
+                        <Link
+                          href={`/services/${category.slug}/${specialty.slug}`}
+                          className="group relative flex min-h-[290px] flex-col justify-end overflow-hidden bg-ink-soft p-6 sm:min-h-[340px] sm:p-7"
                         >
-                          <path d="M5 12h14" /><path d="m13 6 6 6-6 6" />
-                        </svg>
-                      </div>
-                    </Link>
-                  </Reveal>
-                ))}
+                          {specialty.image ? (
+                            <Image
+                              src={specialty.image}
+                              alt={specialty.title[l]}
+                              fill
+                              sizes={
+                                isLastOdd
+                                  ? "(max-width: 1150px) 100vw, 1150px"
+                                  : "(max-width: 640px) 100vw, 50vw"
+                              }
+                              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                            />
+                          ) : (
+                            <span className="flex h-full w-full items-center justify-center text-[0.85rem] text-paper/60">
+                              {specialty.title[l]}
+                            </span>
+                          )}
+
+                          <div className="absolute inset-0 bg-gradient-to-t from-ink/92 via-ink/30 to-transparent transition-opacity duration-500 group-hover:from-ink" />
+
+                          <div className="relative flex items-end justify-between gap-4">
+                            <h2 className="text-[clamp(1.25rem,2.1vw,1.75rem)] leading-snug text-paper">
+                              {specialty.title[l]}
+                            </h2>
+
+                            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-paper/15 backdrop-blur-md transition-colors duration-500 group-hover:bg-[#5DC39B]">
+                              <svg
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="1.8"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="text-paper transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:-scale-x-100"
+                                aria-hidden="true"
+                              >
+                                <path d="M7 17 17 7" />
+                                <path d="M8 7h9v9" />
+                              </svg>
+                            </span>
+                          </div>
+
+                          <span
+                            aria-hidden="true"
+                            className="pointer-events-none absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-[#5DC39B] transition-transform duration-500 ease-out group-hover:scale-x-100 rtl:origin-right"
+                          />
+                        </Link>
+                      </Reveal>
+                    </div>
+                  );
+                })}
               </div>
             )}
           </>
@@ -180,8 +206,20 @@ export default async function CategoryPage({
             href="/services"
             className="group inline-flex items-center gap-2.5 font-medium transition-colors hover:text-leaf"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-400 group-hover:-translate-x-1 rtl:-scale-x-100" aria-hidden="true">
-              <path d="M19 12H5" /><path d="m11 18-6-6 6-6" />
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="transition-transform duration-400 group-hover:-translate-x-1 rtl:-scale-x-100"
+              aria-hidden="true"
+            >
+              <path d="M19 12H5" />
+              <path d="m11 18-6-6 6-6" />
             </svg>
             {l === "ar"
               ? "كل الخدمات"
@@ -190,8 +228,7 @@ export default async function CategoryPage({
                 : "Tous nos services"}
           </Link>
         </div>
-
       </div>
-    </main>
+    </div>
   );
 }

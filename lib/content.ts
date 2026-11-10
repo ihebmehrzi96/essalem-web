@@ -134,7 +134,7 @@ export const specialties: Record<"fr" | "ar" | "en", string[]> = {
 export const figures = [
   { value: 20, suffix: "+", key: "years" },
   { value: 22, suffix: "", key: "specialties" },
-  { value: 120, suffix: "+", key: "beds" },
+  { value: 105, suffix: "", key: "beds" },
   { value: 24, suffix: "h/24", key: "emergency" },
 ];
 

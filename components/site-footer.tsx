@@ -99,6 +99,7 @@ export default function SiteFooter() {
         {/* BG Circle Expand — 600x600 #5DC39B circle that expands on scroll */}
         <div
           ref={circleRef}
+          data-footer-circle
           aria-hidden="true"
           style={{
             width: "600px",

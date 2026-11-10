@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/routing";
-import { findSpecialty, allSpecialtyPaths, type Locale } from "@/content/services";
+import {
+  findSpecialty,
+  allSpecialtyPaths,
+  type Locale,
+} from "@/content/services";
 import { clinic } from "@/lib/content";
 import Reveal from "@/components/reveal";
-
-
 
 export function generateStaticParams() {
   return allSpecialtyPaths();
@@ -40,44 +42,42 @@ export default async function SpecialtyPage({
   const { category, specialty: item, parent } = found;
 
   return (
-    <main className="pb-(--spacing-section)">
-
+    <div className="pb-(--spacing-section)">
       {/* Bandeau */}
       <div className="relative h-[65svh] min-h-[260px] w-full bg-ink-soft">
         {category.image && (
           <Image
             src={category.image}
-            alt=""
+            alt={item.title[l]}
             fill
             priority
             sizes="100vw"
             className="object-cover"
           />
         )}
-        <div className="absolute inset-0 bg-ink/20" />
+        <div className="absolute inset-0 bg-ink/25" />
       </div>
 
       {/* Titre en chevauchement */}
-      <div className="relative z-10 -mt-24 flex justify-center px-5">
-        <div className="max-w-[90%] bg-stone/80 px-12 py-8 text-center backdrop-blur-sm sm:px-20">
-          <span className="block text-[0.76rem] tracking-[0.3em] text-paper/80 uppercase">
+      <div className="relative z-10 -mt-16 flex justify-center px-5">
+        <div className="max-w-[90%] rounded-sm bg-ink px-12 py-6 text-center sm:px-20 sm:py-7">
+          <span className="block text-[0.72rem] tracking-[0.28em] text-[#5DC39B] uppercase">
             {parent ? parent.title[l] : category.title[l]}
           </span>
-          <h1 className="mt-3 text-[clamp(1.8rem,4.2vw,3rem)] leading-[1.15] text-paper">
+          <h1 className="mt-2 text-[clamp(1.6rem,3.6vw,2.6rem)] leading-[1.1] text-paper">
             {item.title[l]}
           </h1>
         </div>
       </div>
 
       <div className="mx-auto mt-16 max-w-[1000px] px-5 sm:px-8">
-
         {/* Visuel + texte */}
         <div className="grid gap-10 md:grid-cols-2 md:gap-12">
           <div className="relative aspect-[3/4] w-full overflow-hidden bg-mist">
             {item.image && (
               <Image
                 src={item.image}
-                alt=""
+                alt={item.title[l]}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
@@ -86,8 +86,8 @@ export default async function SpecialtyPage({
           </div>
 
           <div>
-            <div className="bg-leaf px-8 py-6">
-              <h2 className="text-[0.86rem] tracking-[0.14em] text-paper uppercase">
+            <div className="border-s-4 border-[#5DC39B] bg-ink px-7 py-5">
+              <h2 className="text-[0.9rem] tracking-[0.14em] text-paper uppercase">
                 {item.title[l]}
               </h2>
             </div>
@@ -112,7 +112,7 @@ export default async function SpecialtyPage({
                   {child.image && (
                     <Image
                       src={child.image}
-                      alt=""
+                      alt={child.title[l]}
                       fill
                       sizes="(max-width: 640px) 100vw, 33vw"
                       className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.06]"
@@ -147,8 +147,20 @@ export default async function SpecialtyPage({
             }
             className="group inline-flex items-center gap-2.5 font-medium transition-colors hover:text-leaf"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-400 group-hover:-translate-x-1 rtl:-scale-x-100" aria-hidden="true">
-              <path d="M19 12H5" /><path d="m11 18-6-6 6-6" />
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="transition-transform duration-400 group-hover:-translate-x-1 rtl:-scale-x-100"
+              aria-hidden="true"
+            >
+              <path d="M19 12H5" />
+              <path d="m11 18-6-6 6-6" />
             </svg>
             {parent ? parent.title[l] : category.title[l]}
           </Link>
@@ -161,8 +173,7 @@ export default async function SpecialtyPage({
             {clinic.phone}
           </a>
         </div>
-
       </div>
-    </main>
+    </div>
   );
 }

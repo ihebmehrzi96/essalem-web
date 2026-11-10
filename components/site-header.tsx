@@ -16,6 +16,7 @@ export default function SiteHeader() {
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [pastHero, setPastHero] = useState(false);
+  const [isOverFooter, setIsOverFooter] = useState(false);
 
   // Synchronized external store persists state during client-side locale route switches
   // Server snapshot is always false to eliminate any SSR hydration mismatch
@@ -34,7 +35,13 @@ export default function SiteHeader() {
   const navRef = useRef<HTMLElement>(null);
   const linksContainerRef = useRef<HTMLUListElement>(null);
 
-  const isHeroPage = pathname === "/" || pathname === "/presentation";
+  const isHeroPage =
+    pathname === "/" ||
+    pathname === "/presentation" ||
+    pathname === "/demarche-qualite" ||
+    pathname === "/votre-sejour" ||
+    pathname === "/recrutement" ||
+    pathname.startsWith("/services/");
   const isOverDarkHero = isHeroPage && !pastHero;
 
   useEffect(() => {
@@ -42,6 +49,14 @@ export default function SiteHeader() {
       setIsScrolled(window.scrollY > 24);
       const threshold = pathname === "/" ? window.innerHeight * 0.98 : 320;
       setPastHero(window.scrollY > threshold);
+
+      const footerCircle = document.querySelector("[data-footer-circle]");
+      if (footerCircle) {
+        const rect = footerCircle.getBoundingClientRect();
+        setIsOverFooter(rect.top <= 90);
+      } else {
+        setIsOverFooter(false);
+      }
     };
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -158,6 +173,8 @@ export default function SiteHeader() {
               className={`text-xs sm:text-sm font-semibold uppercase tracking-[0.16em] transition-colors duration-300 ${
                 isOverDarkHero
                   ? "text-white hover:text-leaf"
+                  : isOverFooter
+                  ? "text-ink hover:text-white"
                   : "text-ink hover:text-leaf"
               }`}
             >
@@ -176,6 +193,8 @@ export default function SiteHeader() {
                   className={`block w-full h-[2.5px] rounded-full transition-all duration-300 group-hover:translate-x-1 ${
                     isOverDarkHero
                       ? "bg-white group-hover:bg-leaf"
+                      : isOverFooter
+                      ? "bg-ink group-hover:bg-white"
                       : "bg-leaf group-hover:bg-ink"
                   }`}
                 />
@@ -183,6 +202,8 @@ export default function SiteHeader() {
                   className={`block w-full h-[2.5px] rounded-full transition-all duration-300 group-hover:-translate-x-1 ${
                     isOverDarkHero
                       ? "bg-white group-hover:bg-leaf"
+                      : isOverFooter
+                      ? "bg-ink group-hover:bg-white"
                       : "bg-leaf group-hover:bg-ink"
                   }`}
                 />

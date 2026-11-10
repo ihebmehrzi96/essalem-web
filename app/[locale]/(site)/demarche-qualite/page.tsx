@@ -1,18 +1,39 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { qualite } from "@/content/qualite";
+import { qualite, type Locale } from "@/content/qualite";
 
-/** Toujours en français, quelle que soit la langue du site. */
-const CERTIFICATIONS = [
-  {
-    src: "/images/qualite/iso-9001.jpg",
-    caption: "Certification ISO 9001 version 2015",
-  },
-  {
-    src: "/images/qualite/accreditation-platine.jpg",
-    caption: "Accréditation niveau platine",
-  },
-];
+const CERTIFICATIONS: Record<Locale, { src: string; caption: string }[]> = {
+  fr: [
+    {
+      src: "/images/qualite/iso-9001.jpg",
+      caption: "Certification ISO 9001 version 2015",
+    },
+    {
+      src: "/images/qualite/accreditation-platine.jpg",
+      caption: "Accréditation niveau Platine — INEAS",
+    },
+  ],
+  ar: [
+    {
+      src: "/images/qualite/iso-9001.jpg",
+      caption: "شهادة المواصفة القياسية ISO 9001 إصدار 2015",
+    },
+    {
+      src: "/images/qualite/accreditation-platine.jpg",
+      caption: "شهادة الاعتماد الصحي من المستوى البلاتيني — INEAS",
+    },
+  ],
+  en: [
+    {
+      src: "/images/qualite/iso-9001.jpg",
+      caption: "ISO 9001:2015 Quality Certification",
+    },
+    {
+      src: "/images/qualite/accreditation-platine.jpg",
+      caption: "Platinum-Level Healthcare Accreditation — INEAS",
+    },
+  ],
+};
 
 export async function generateMetadata({
   params,
@@ -46,17 +67,19 @@ export default async function QualitePage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const page = qualite[locale as keyof typeof qualite];
-  if (!page) notFound();
+  const lang = (locale as Locale) in qualite ? (locale as Locale) : null;
+  if (!lang) notFound();
+
+  const page = qualite[lang];
+  const certs = CERTIFICATIONS[lang];
 
   return (
-    <main className="pb-(--spacing-section)">
-
+    <div className="pb-(--spacing-section)">
       {/* Bandeau image pleine largeur */}
       <div className="relative h-[65svh] min-h-[280px] w-full bg-ink-soft">
         <Image
           src="/images/qualite/cover.jpg"
-          alt=""
+          alt={page.title}
           fill
           priority
           sizes="100vw"
@@ -75,7 +98,7 @@ export default async function QualitePage({
       {/* Certifications — plus larges que le corps de texte */}
       <div className="mx-auto mt-16 max-w-[1000px] px-5 sm:px-6">
         <div className="grid gap-10 sm:grid-cols-2">
-          {CERTIFICATIONS.map((item) => (
+          {certs.map((item) => (
             <figure key={item.src}>
               <div className="relative h-[380px] w-full overflow-hidden bg-mist sm:h-[440px]">
                 <Image
@@ -86,10 +109,7 @@ export default async function QualitePage({
                   className="object-contain p-4"
                 />
               </div>
-              <figcaption
-                dir="ltr"
-                className="mt-4 text-center text-[0.95rem] text-stone"
-              >
+              <figcaption className="mt-4 text-center text-[0.95rem] text-stone">
                 {item.caption}
               </figcaption>
             </figure>
@@ -98,7 +118,6 @@ export default async function QualitePage({
       </div>
 
       <div className="mx-auto max-w-[760px] px-5 sm:px-6">
-
         {/* Système de management */}
         <section className="mt-20">
           <h2 className="text-center text-[1.6rem]">{page.system.heading}</h2>
@@ -188,8 +207,7 @@ export default async function QualitePage({
             ))}
           </ul>
         </section>
-
       </div>
-    </main>
+    </div>
   );
 }
