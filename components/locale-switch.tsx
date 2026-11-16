@@ -7,10 +7,16 @@ import { useEffect, useState, useTransition } from "react";
 const LANGUAGES = [
   { code: "fr", badge: "FR", name: "Français" },
   { code: "ar", badge: "AR", name: "العربية" },
-  { code: "en", badge: "GB", name: "English" },
+  { code: "en", badge: "EN", name: "English" },
 ] as const;
 
-export default function LocaleSwitch({ dark = false }: { dark?: boolean }) {
+export default function LocaleSwitch({
+  dark = false,
+  variant = "default",
+}: {
+  dark?: boolean;
+  variant?: "default" | "navbar";
+}) {
   const currentLocale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -31,6 +37,42 @@ export default function LocaleSwitch({ dark = false }: { dark?: boolean }) {
     startTransition(() => {
       router.replace(pathname, { locale: next, scroll: false });
     });
+  }
+
+  if (variant === "navbar") {
+    return (
+      <div
+        className={`inline-flex items-center p-0.5 sm:p-1 rounded-full border backdrop-blur-md transition-all duration-300 ${
+          dark
+            ? "bg-white/10 border-white/20 text-white"
+            : "bg-ink/5 border-ink/10 text-ink"
+        }`}
+        role="group"
+        aria-label="Sélection de langue"
+        aria-busy={pending}
+      >
+        {LANGUAGES.map((lang) => {
+          const isActive = lang.code === activeLocale;
+          return (
+            <button
+              key={lang.code}
+              type="button"
+              onClick={() => change(lang.code)}
+              aria-current={isActive ? "true" : undefined}
+              className={`px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer select-none ${
+                isActive
+                  ? "bg-leaf text-white shadow-sm shadow-leaf/30"
+                  : dark
+                  ? "text-white/70 hover:text-white hover:bg-white/10"
+                  : "text-ink/65 hover:text-ink hover:bg-black/5"
+              }`}
+            >
+              {lang.badge}
+            </button>
+          );
+        })}
+      </div>
+    );
   }
 
   return (

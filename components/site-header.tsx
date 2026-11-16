@@ -167,8 +167,11 @@ export default function SiteHeader() {
             />
           </Link>
 
-          {/* Right: Contact Link + Sleek Minimal Hamburger Icon (No Box) */}
-          <div className="pointer-events-auto flex items-center gap-5 sm:gap-7 shrink-0">
+          {/* Right: Language Switcher + Contact Link + Sleek Minimal Hamburger Icon */}
+          <div className="pointer-events-auto flex items-center gap-3 sm:gap-6 shrink-0">
+            {/* Language Switcher in Navbar */}
+            <LocaleSwitch variant="navbar" dark={isOverDarkHero || isOverFooter} />
+
             <Link
               href="/contact"
               className={`text-xs sm:text-sm font-semibold uppercase tracking-[0.16em] transition-colors duration-300 ${
