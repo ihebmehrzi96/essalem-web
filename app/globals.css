@@ -70,7 +70,7 @@
   animation: rail 145s linear infinite;
 }
 .rail-track-reverse {
-  animation: rail-reverse 42s linear infinite;
+  animation: rail-reverse 145s linear infinite;
 }
 .rail-track-slow {
   animation: rail 65s linear infinite;

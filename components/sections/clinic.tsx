@@ -339,7 +339,11 @@ export default function Clinic() {
         dir="ltr"
         className="group overflow-hidden border-y border-black/8 bg-white py-4 sm:py-5 select-none"
       >
-        <div className="rail-track flex w-max items-center gap-8 whitespace-nowrap group-hover:[animation-play-state:paused]">
+        <div
+          className={`${
+            locale === "ar" ? "rail-track-reverse" : "rail-track"
+          } flex w-max items-center gap-8 whitespace-nowrap group-hover:[animation-play-state:paused]`}
+        >
           {[...names, ...names].map((name, i) => {
             const item = SPECIALTY_COLORS[i % SPECIALTY_COLORS.length];
 
