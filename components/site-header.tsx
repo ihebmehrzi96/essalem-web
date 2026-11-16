@@ -444,11 +444,6 @@ export default function SiteHeader() {
             </div>
           </div>
         </div>
-
-        {/* Subtle footer credit inside menu */}
-        <div className="text-center text-[11px] sm:text-[12px] text-zinc-400 font-mono tracking-wider uppercase pb-1 relative z-10 shrink-0">
-          {tf("clinicName")} — {tf("cityCountry")}
-        </div>
       </nav>
     </>
   );
