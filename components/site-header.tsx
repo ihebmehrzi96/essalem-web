@@ -367,7 +367,7 @@ export default function SiteHeader() {
             </li>
           </ul>
 
-          {/* Bottom Preferences: Language Switcher */}
+          {/* Bottom Preferences: Language Switcher + Emergency Phone + Address */}
           <div
             style={{
               transition: "opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
@@ -375,9 +375,55 @@ export default function SiteHeader() {
               opacity: isOpen ? 1 : 0,
               transform: isOpen ? "translate3d(0, 0, 0)" : "translate3d(0, 16px, 0)",
             }}
-            className="mt-5 pt-4 sm:mt-6 sm:pt-5 border-t border-white/10 flex items-center justify-center"
+            className="mt-4 pt-3.5 sm:mt-6 sm:pt-4 border-t border-white/10 flex flex-col items-center gap-3"
           >
+            {/* Language Switcher */}
             <LocaleSwitch dark={true} />
+
+            {/* Quick Contact & Address Badges */}
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 pt-1">
+              {/* Phone with active indicator */}
+              <a
+                href={clinic.phoneHref}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-leaf text-white border border-white/15 transition-all duration-200 group text-xs sm:text-sm font-semibold tracking-wide shadow-sm"
+              >
+                <span className="w-2 h-2 rounded-full bg-leaf group-hover:bg-white animate-pulse" />
+                <svg
+                  className="w-3.5 h-3.5 text-leaf group-hover:text-white transition-colors"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+                <span dir="ltr">{clinic.phone}</span>
+              </a>
+
+              {/* Address Badge with Google Maps link */}
+              <a
+                href="https://maps.google.com/?q=Clinique+Essalem+Sousse"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/15 text-white/85 hover:text-white border border-white/10 transition-all duration-200 text-xs sm:text-sm"
+              >
+                <svg
+                  className="w-3.5 h-3.5 text-leaf"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span>{tf("addressLine1")}, {tf("cityCountry")}</span>
+              </a>
+            </div>
           </div>
         </div>
 
