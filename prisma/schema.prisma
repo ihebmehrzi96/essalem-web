@@ -88,3 +88,63 @@ model ContactMessage {
 
   @@index([handled, createdAt])
 }
+
+model ServiceCategory {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  order     Int      @default(0)
+  image     String?
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  translations ServiceCategoryTranslation[]
+  specialties  Specialty[]
+
+  @@index([published, order])
+}
+
+model ServiceCategoryTranslation {
+  id         String   @id @default(cuid())
+  categoryId String
+  locale     String
+  title      String
+  intro      String?
+
+  category ServiceCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, locale])
+}
+
+model Specialty {
+  id         String   @id @default(cuid())
+  categoryId String
+  parentId   String?
+  slug       String
+  order      Int      @default(0)
+  image      String?
+  published  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  category     ServiceCategory        @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  parent       Specialty?             @relation("SpecialtyChildren", fields: [parentId], references: [id], onDelete: Cascade)
+  children     Specialty[]            @relation("SpecialtyChildren")
+  translations SpecialtyTranslation[]
+
+  @@unique([categoryId, slug])
+  @@index([published, order])
+  @@index([parentId])
+}
+
+model SpecialtyTranslation {
+  id          String   @id @default(cuid())
+  specialtyId String
+  locale      String
+  title       String
+  body        String?
+
+  specialty Specialty @relation(fields: [specialtyId], references: [id], onDelete: Cascade)
+
+  @@unique([specialtyId, locale])
+}
