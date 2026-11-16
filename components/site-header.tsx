@@ -1,11 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
 import { AnimatePresence, motion } from "motion/react";
 import { Link, usePathname } from "@/i18n/routing";
-import gsap from "gsap";
 import LocaleSwitch from "@/components/locale-switch";
 import { clinic, nav } from "@/lib/content";
 import { menuStore } from "@/lib/menu-store";
@@ -32,9 +31,6 @@ export default function SiteHeader() {
     menuStore.getOpenSubmenu,
     () => null
   );
-
-  const navRef = useRef<HTMLElement>(null);
-  const linksContainerRef = useRef<HTMLUListElement>(null);
 
   const isHeroPage =
     pathname === "/" ||
@@ -84,50 +80,13 @@ export default function SiteHeader() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
 
-  // Casino-Style GSAP Slide Transition
+  // Pure Native CSS + JS Transitions (Ultra smooth, zero lag, zero GSAP overhead)
   const handleOpenNav = () => {
     menuStore.open();
-
-    if (navRef.current) {
-      gsap.killTweensOf(navRef.current);
-      gsap.fromTo(
-        navRef.current,
-        { x: "100%" },
-        { x: "0%", duration: 0.65, ease: "power4.out" }
-      );
-    }
-
-    if (linksContainerRef.current) {
-      const items = linksContainerRef.current.querySelectorAll("li a, li > div");
-      gsap.fromTo(
-        items,
-        { opacity: 0, y: 25 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.08,
-          duration: 0.45,
-          ease: "power3.out",
-          delay: 0.1,
-        }
-      );
-    }
   };
 
   const handleCloseNav = () => {
-    if (navRef.current) {
-      gsap.killTweensOf(navRef.current);
-      gsap.to(navRef.current, {
-        x: "100%",
-        duration: 0.5,
-        ease: "power4.in",
-        onComplete: () => {
-          menuStore.close();
-        },
-      });
-    } else {
-      menuStore.close();
-    }
+    menuStore.close();
   };
 
   return (
@@ -167,25 +126,20 @@ export default function SiteHeader() {
             />
           </Link>
 
-          {/* Right: Language Switcher + Contact Link + Sleek Minimal Hamburger Icon */}
-          <div className="pointer-events-auto flex items-center gap-3 sm:gap-6 shrink-0">
-            {/* Language Switcher in Navbar */}
+          {/* Right: Language Flags on the left of the Menu */}
+          <div className="pointer-events-auto flex items-center gap-3.5 sm:gap-5 md:gap-6 shrink-0">
+            {/* Language Flags */}
             <LocaleSwitch variant="navbar" dark={isOverDarkHero || isOverFooter} />
 
-            <Link
-              href="/contact"
-              className={`text-xs sm:text-sm font-semibold uppercase tracking-[0.16em] transition-colors duration-300 ${
-                isOverFooter
-                  ? "text-white hover:text-ink"
-                  : isOverDarkHero
-                  ? "text-white hover:text-leaf"
-                  : "text-ink hover:text-leaf"
+            {/* Subtle separator */}
+            <span
+              className={`w-px h-3.5 sm:h-4 transition-colors duration-300 ${
+                isOverFooter || isOverDarkHero ? "bg-white/25" : "bg-ink/20"
               }`}
-            >
-              {t("contact")}
-            </Link>
+              aria-hidden="true"
+            />
 
-            {/* Minimal 2-Bar Hamburger Button (like Arpeggio reference) */}
+            {/* Minimal 2-Bar Hamburger Button */}
             <button
               type="button"
               onClick={handleOpenNav}
@@ -217,19 +171,17 @@ export default function SiteHeader() {
         </div>
       </header>
 
-      {/* ── Frosted Transparent Blur Fullscreen Menu (Casino layout & font, with pure blur) ── */}
+      {/* ── Fullscreen Menu (Pure CSS GPU acceleration, butter-smooth 60/120fps, zero lag) ── */}
       <nav
-        ref={navRef}
         suppressHydrationWarning
         style={{
-          transform: isOpen ? "translateX(0%)" : "translateX(100%)",
-          background: "rgba(10, 20, 16, 0.72)",
-          backdropFilter: "blur(28px)",
-          WebkitBackdropFilter: "blur(28px)",
+          transform: isOpen ? "translate3d(0, 0, 0)" : "translate3d(100%, 0, 0)",
+          transition: "transform 0.48s cubic-bezier(0.16, 1, 0.3, 1)",
+          background: "rgba(10, 20, 16, 0.96)",
           scrollbarWidth: "none",
           msOverflowStyle: "none",
         }}
-        className={`fixed inset-0 w-full h-screen text-white flex flex-col justify-between py-5 sm:py-7 px-4 sm:px-8 z-[9999] overflow-y-auto no-scrollbar border-l border-white/10 ${
+        className={`fixed inset-0 w-full h-screen text-white flex flex-col justify-between py-5 sm:py-7 px-4 sm:px-8 z-[9999] overflow-y-auto no-scrollbar border-l border-white/10 will-change-transform ${
           isOpen ? "pointer-events-auto" : "pointer-events-none"
         }`}
         aria-label="Fullscreen Navigation"
@@ -258,7 +210,7 @@ export default function SiteHeader() {
           {/* Close button with rotating X icon */}
           <div
             onClick={handleCloseNav}
-            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/10 hover:bg-leaf border border-white/15 backdrop-blur-md flex items-center justify-center transition-all duration-200 cursor-pointer text-white shadow-lg group focus:outline-none"
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/10 hover:bg-leaf border border-white/15 flex items-center justify-center transition-all duration-200 cursor-pointer text-white shadow-lg group focus:outline-none"
             role="button"
             tabIndex={0}
             aria-label="Fermer le menu"
@@ -281,11 +233,18 @@ export default function SiteHeader() {
           </div>
         </div>
 
-        {/* Centered Area: Casino Centered Links + Submenus */}
+        {/* Centered Area: Links with Pure CSS Staggered Cascade */}
         <div className="my-auto text-center w-full max-w-xl mx-auto py-3 sm:py-4 relative z-10">
-          <ul ref={linksContainerRef} className="space-y-2 sm:space-y-3">
+          <ul className="space-y-2 sm:space-y-3">
             {/* Home Link */}
-            <li>
+            <li
+              style={{
+                transition: "opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+                transitionDelay: isOpen ? "100ms" : "0ms",
+                opacity: isOpen ? 1 : 0,
+                transform: isOpen ? "translate3d(0, 0, 0)" : "translate3d(0, 20px, 0)",
+              }}
+            >
               <Link
                 href="/"
                 onClick={handleCloseNav}
@@ -299,12 +258,21 @@ export default function SiteHeader() {
               </Link>
             </li>
 
-            {nav.map((item) => {
+            {nav.map((item, index) => {
               const hasChildren = item.children && item.children.length > 0;
               const isSubOpen = openSubmenu === item.key;
+              const delay = 140 + index * 40;
 
               return (
-                <li key={item.href}>
+                <li
+                  key={item.href}
+                  style={{
+                    transition: "opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+                    transitionDelay: isOpen ? `${delay}ms` : "0ms",
+                    opacity: isOpen ? 1 : 0,
+                    transform: isOpen ? "translate3d(0, 0, 0)" : "translate3d(0, 20px, 0)",
+                  }}
+                >
                   {hasChildren ? (
                     <div className="flex flex-col items-center">
                       <div className="inline-flex items-center gap-2">
@@ -379,10 +347,36 @@ export default function SiteHeader() {
                 </li>
               );
             })}
+
+            {/* Contact Link */}
+            <li
+              style={{
+                transition: "opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+                transitionDelay: isOpen ? `${140 + nav.length * 40}ms` : "0ms",
+                opacity: isOpen ? 1 : 0,
+                transform: isOpen ? "translate3d(0, 0, 0)" : "translate3d(0, 20px, 0)",
+              }}
+            >
+              <Link
+                href="/contact"
+                onClick={handleCloseNav}
+                className="font-tanker text-2xl sm:text-3xl lg:text-4xl tracking-wider uppercase text-white hover:text-leaf transition-colors inline-block"
+              >
+                {t("contact")}
+              </Link>
+            </li>
           </ul>
 
           {/* Bottom Preferences: Language Switcher */}
-          <div className="mt-5 pt-4 sm:mt-6 sm:pt-5 border-t border-white/10 flex items-center justify-center">
+          <div
+            style={{
+              transition: "opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+              transitionDelay: isOpen ? `${180 + nav.length * 40}ms` : "0ms",
+              opacity: isOpen ? 1 : 0,
+              transform: isOpen ? "translate3d(0, 0, 0)" : "translate3d(0, 16px, 0)",
+            }}
+            className="mt-5 pt-4 sm:mt-6 sm:pt-5 border-t border-white/10 flex items-center justify-center"
+          >
             <LocaleSwitch dark={true} />
           </div>
         </div>

@@ -13,7 +13,8 @@ export default function Counter({
   todo?: boolean;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  // amount: 0.2 works reliably across all mobile and desktop viewports without clipping horizontal bounds
+  const inView = useInView(ref, { once: true, amount: 0.2 });
   const [value, setValue] = useState(0);
 
   useEffect(() => {
@@ -38,6 +39,14 @@ export default function Counter({
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
   }, [inView, to, todo]);
+
+  // Fallback safety: ensures numbers are never stuck at 0 on mobile devices or fast scrolls
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setValue((current) => (current === 0 ? to : current));
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [to]);
 
   return (
     <span ref={ref} className="font-display text-[clamp(2.3rem,4.2vw,3.4rem)] tracking-tight">
