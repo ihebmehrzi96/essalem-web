@@ -367,15 +367,33 @@ export default function SiteHeader() {
             </li>
           </ul>
 
+          {/* Architectural Sparkle Divider */}
+          <div
+            aria-hidden="true"
+            style={{
+              transition: "opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+              transitionDelay: isOpen ? `${160 + nav.length * 40}ms` : "0ms",
+              opacity: isOpen ? 1 : 0,
+              transform: isOpen ? "translate3d(0, 0, 0)" : "translate3d(0, 16px, 0)",
+            }}
+            className="w-full max-w-xs sm:max-w-sm mx-auto my-3 sm:my-4 flex items-center justify-center gap-2.5 sm:gap-3"
+          >
+            <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#5DC39B]/40 to-[#5DC39B]/80" />
+            <span className="flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full border border-[#5DC39B]/60 bg-black/40 text-[0.65rem] sm:text-[0.7rem] text-[#5DC39B] shadow-sm">
+              ✦
+            </span>
+            <span className="h-px flex-1 bg-gradient-to-l from-transparent via-[#5DC39B]/40 to-[#5DC39B]/80" />
+          </div>
+
           {/* Bottom Preferences: Language Switcher + Emergency Phone + Address */}
           <div
             style={{
               transition: "opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-              transitionDelay: isOpen ? `${180 + nav.length * 40}ms` : "0ms",
+              transitionDelay: isOpen ? `${190 + nav.length * 40}ms` : "0ms",
               opacity: isOpen ? 1 : 0,
               transform: isOpen ? "translate3d(0, 0, 0)" : "translate3d(0, 16px, 0)",
             }}
-            className="mt-4 pt-3.5 sm:mt-6 sm:pt-4 border-t border-white/10 flex flex-col items-center gap-3"
+            className="flex flex-col items-center gap-3"
           >
             {/* Language Switcher */}
             <LocaleSwitch dark={true} />
