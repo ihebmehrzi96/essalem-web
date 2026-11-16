@@ -31,18 +31,30 @@ export default async function ContactPage({
   if (!page) notFound();
 
   return (
-    <main className="pb-(--spacing-section)">
+    <main>
       <section className="px-5 pt-32 pb-14 sm:px-8 md:pt-44">
-        <div className="mx-auto max-w-[1150px]">
+        <div className="mx-auto max-w-[1150px] text-center">
           <span className="text-[0.8rem] tracking-[0.24em] text-leaf uppercase">
             {page.eyebrow}
           </span>
           <h1 className="mt-4 text-[clamp(2.4rem,6.5vw,5rem)] leading-[0.98]">
             {page.title}
           </h1>
-          <p className="mt-7 max-w-[52ch] text-[1.05rem] leading-relaxed text-stone">
+          <p className="mx-auto mt-7 max-w-[56ch] text-[1.05rem] leading-relaxed text-stone">
             {page.intro}
           </p>
+
+          {/* Séparation architecturale centrée */}
+          <div
+            aria-hidden="true"
+            className="mt-8 flex items-center justify-center gap-4 sm:mt-10"
+          >
+            <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#5DC39B]/55 to-[#5DC39B]" />
+            <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[#5DC39B]/60 bg-white text-[0.7rem] text-[#5DC39B] shadow-2xs">
+              ✦
+            </span>
+            <span className="h-px flex-1 bg-gradient-to-l from-transparent via-[#5DC39B]/55 to-[#5DC39B]" />
+          </div>
         </div>
       </section>
 

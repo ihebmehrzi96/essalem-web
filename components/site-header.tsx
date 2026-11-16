@@ -158,7 +158,7 @@ export default function SiteHeader() {
             className="pointer-events-auto shrink-0 flex items-center transition-opacity hover:opacity-85"
           >
             <Image
-              src={isOverDarkHero ? "/logo-essalem-white.svg" : "/logo-essalem.svg"}
+              src={isOverDarkHero || isOverFooter ? "/logo-essalem-white.svg" : "/logo-essalem.svg"}
               alt={clinic.name}
               width={200}
               height={150}
@@ -172,10 +172,10 @@ export default function SiteHeader() {
             <Link
               href="/contact"
               className={`text-xs sm:text-sm font-semibold uppercase tracking-[0.16em] transition-colors duration-300 ${
-                isOverDarkHero
+                isOverFooter
+                  ? "text-white hover:text-ink"
+                  : isOverDarkHero
                   ? "text-white hover:text-leaf"
-                  : isOverFooter
-                  ? "text-ink hover:text-white"
                   : "text-ink hover:text-leaf"
               }`}
             >
@@ -192,19 +192,19 @@ export default function SiteHeader() {
               <div className="w-8 sm:w-9 h-[10px] flex flex-col justify-between relative pointer-events-none">
                 <span
                   className={`block w-full h-[2.5px] rounded-full transition-all duration-300 group-hover:translate-x-1 ${
-                    isOverDarkHero
+                    isOverFooter
+                      ? "bg-white group-hover:bg-ink"
+                      : isOverDarkHero
                       ? "bg-white group-hover:bg-leaf"
-                      : isOverFooter
-                      ? "bg-ink group-hover:bg-white"
                       : "bg-leaf group-hover:bg-ink"
                   }`}
                 />
                 <span
                   className={`block w-full h-[2.5px] rounded-full transition-all duration-300 group-hover:-translate-x-1 ${
-                    isOverDarkHero
+                    isOverFooter
+                      ? "bg-white group-hover:bg-ink"
+                      : isOverDarkHero
                       ? "bg-white group-hover:bg-leaf"
-                      : isOverFooter
-                      ? "bg-ink group-hover:bg-white"
                       : "bg-leaf group-hover:bg-ink"
                   }`}
                 />

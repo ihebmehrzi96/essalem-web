@@ -1,13 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { Link, usePathname } from "@/i18n/routing";
+import { Link } from "@/i18n/routing";
 import { clinic } from "@/lib/content";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const MAP_SRC =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3234.3916896023056!2d10.618824216098437!3d35.83939798015767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13027580bf92c027%3A0xcdb5761297fc24b0!2sClinique%20Essalem%20Sousse!5e0!3m2!1sfr!2stn!4v1600960303372!5m2!1sfr!2stn";
@@ -201,262 +197,223 @@ export function Contact() {
 export default function SiteFooter() {
   const t = useTranslations("footer");
   const tn = useTranslations("nav");
-  const pathname = usePathname();
-
-  const footerRef = useRef<HTMLElement>(null);
-  const circleRef = useRef<HTMLDivElement>(null);
-  const outerCardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const footer = footerRef.current;
-    const circle = circleRef.current;
-    const card = outerCardRef.current;
-    if (!footer || !circle || !card) return;
-
-    const ctx = gsap.context(() => {
-      // 1. Expanding #5DC39B circle dome
-      gsap.fromTo(
-        circle,
-        {
-          scale: 0.85,
-        },
-        {
-          scale: 6.2,
-          ease: "none",
-          scrollTrigger: {
-            trigger: footer,
-            start: "top 95%",
-            end: "bottom bottom",
-            scrub: 0.3,
-            invalidateOnRefresh: true,
-          },
-        }
-      );
-
-      // 2. Inner rounded card scales from 0.85 to 1
-      gsap.fromTo(
-        card,
-        {
-          scale: 0.85,
-        },
-        {
-          scale: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: footer,
-            start: "top 95%",
-            end: "bottom bottom",
-            scrub: 0.3,
-            invalidateOnRefresh: true,
-          },
-        }
-      );
-    }, footer);
-
-    // Refresh ScrollTrigger after route change & layout settle
-    const rafId = requestAnimationFrame(() => {
-      ScrollTrigger.refresh();
-    });
-    const timerId = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 250);
-
-    const ro = new ResizeObserver(() => {
-      ScrollTrigger.refresh();
-    });
-    ro.observe(document.body);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      clearTimeout(timerId);
-      ro.disconnect();
-      ctx.revert();
-    };
-  }, [pathname]);
 
   return (
-    <div className="relative z-10 w-full">
-      <footer
-        ref={footerRef}
-        id="footer"
-        className="relative flex w-full flex-col items-center justify-center overflow-visible p-0"
-      >
-        {/* BG Circle Expand — 600x600 #5DC39B circle that expands on scroll */}
-        <div
-          ref={circleRef}
-          data-footer-circle
-          aria-hidden="true"
-          style={{
-            width: "600px",
-            height: "600px",
-            top: "calc(50% - 300px)",
-            left: "calc(50% - 300px)",
-            transform: "scale(0.75)",
-          }}
-          className="pointer-events-none absolute rounded-full bg-[#5DC39B] will-change-transform"
-        />
-
-        {/* Outer Frame (20px green margin around the card) */}
-        <div className="relative z-10 flex w-full max-w-[1920px] flex-col items-center justify-center p-3 sm:p-6">
-          {/* Spacious Rounded Card (#f7f7ed) with the 4-column content */}
-          <div
-            ref={outerCardRef}
-            style={{ transform: "scale(0.85)" }}
-            className="flex min-h-[400px] w-full flex-col justify-between overflow-clip rounded-[36px] bg-[#f7f7ed] px-8 py-12 text-[#292929] will-change-transform sm:min-h-[460px] sm:rounded-[40px] sm:px-12 sm:py-16 md:px-16 md:py-20"
-          >
-            <div className="mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-between gap-12">
-              <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-14">
-                {/* Column 1: Clinic Name, Address, Phone */}
-                <div>
-                  <span className="font-display block text-2xl font-bold text-[#292929] sm:text-3xl">
-                    {t("clinicName")}
-                  </span>
-                  <p className="mt-5 text-base leading-relaxed text-[#616161] sm:text-[1.05rem]">
-                    {t("addressLine1")}
-                    <br />
-                    {t("addressLine2")}
-                  </p>
-                  <a
-                    href={clinic.phoneHref}
-                    dir="ltr"
-                    className="mt-6 inline-flex items-center gap-3 text-base font-semibold text-[#292929] transition-colors hover:text-[#5DC39B] sm:text-[1.05rem]"
-                  >
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#5DC39B] text-white">
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        aria-hidden="true"
-                      >
-                        <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z" />
-                      </svg>
-                    </span>
-                    {clinic.phone}
-                  </a>
-                </div>
-
-                {/* Column 2: Services */}
-                <nav className="flex flex-col gap-3.5 text-base text-[#616161] sm:text-[1.05rem]">
-                  <span className="mb-2 text-lg font-semibold text-[#292929]">
-                    {t("services")}
-                  </span>
-                  <Link
-                    href="/services/specialites-chirurgicales"
-                    className="transition-colors hover:text-[#5DC39B]"
-                  >
-                    {tn("surgical")}
-                  </Link>
-                  <Link
-                    href="/services/specialites-medicales"
-                    className="transition-colors hover:text-[#5DC39B]"
-                  >
-                    {tn("medical")}
-                  </Link>
-                  <Link
-                    href="/services/gynecologie-obstetrique"
-                    className="transition-colors hover:text-[#5DC39B]"
-                  >
-                    {tn("gyneco")}
-                  </Link>
-                  <Link
-                    href="/services/plateau-technique"
-                    className="transition-colors hover:text-[#5DC39B]"
-                  >
-                    {tn("technical")}
-                  </Link>
-                  <Link
-                    href="/services/urgences"
-                    className="transition-colors hover:text-[#5DC39B]"
-                  >
-                    {tn("emergency")}
-                  </Link>
-                </nav>
-
-                {/* Column 3: Keep in touch */}
-                <nav className="flex flex-col gap-3.5 text-base text-[#616161] sm:text-[1.05rem]">
-                  <span className="mb-2 text-lg font-semibold text-[#292929]">
-                    {t("keepInTouch")}
-                  </span>
-                  <Link
-                    href="/contact"
-                    className="underline decoration-[#5DC39B]/50 underline-offset-4 transition-colors hover:text-[#5DC39B]"
-                  >
-                    {t("review")}
-                  </Link>
-                  <Link
-                    href="/recrutement"
-                    className="underline decoration-[#5DC39B]/50 underline-offset-4 transition-colors hover:text-[#5DC39B]"
-                  >
-                    {t("recruitment")}
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="underline decoration-[#5DC39B]/50 underline-offset-4 transition-colors hover:text-[#5DC39B]"
-                  >
-                    {t("contact")}
-                  </Link>
-                </nav>
-
-                {/* Column 4: Socials */}
-                <div>
-                  <span className="mb-5 block text-lg font-semibold text-[#292929]">
-                    {t("follow")}
-                  </span>
-                  <div className="flex gap-3.5">
-                    <a
-                      href={clinic.facebook}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label="Facebook"
-                      className="flex h-13 w-13 items-center justify-center rounded-full bg-white text-[#292929] shadow-2xs transition-colors hover:bg-[#5DC39B] hover:text-white"
-                    >
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.5l.5-3h-3v-2c0-.6.4-1 1-1Z" />
-                      </svg>
-                    </a>
-                    <a
-                      href={clinic.linkedin}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label="LinkedIn"
-                      className="flex h-13 w-13 items-center justify-center rounded-full bg-white text-[#292929] shadow-2xs transition-colors hover:bg-[#5DC39B] hover:text-white"
-                    >
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path d="M6.5 8H4v12h2.5V8ZM5.2 3.5a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2ZM20 13.3c0-3-1.6-4.5-3.8-4.5-1.5 0-2.3.8-2.7 1.4V8H11v12h2.5v-6.6c0-1.3.7-2.1 1.8-2.1s1.7.8 1.7 2.1V20H20v-6.7Z" />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
+    <footer
+      id="footer"
+      data-footer-circle
+      className="relative z-10 w-full border-t-4 border-[#43a982] bg-ink text-paper"
+    >
+      <div className="mx-auto max-w-[1380px] px-5 pt-14 pb-10 sm:px-8 sm:pt-18 md:px-12">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
+          {/* Left Signature Brand & Direct Contact Block */}
+          <div className="flex flex-col justify-between gap-8 lg:col-span-5">
+            <div>
+              <div className="flex items-center gap-3.5">
+                <Image
+                  src="/logo-essalem-white.svg"
+                  alt={t("clinicName")}
+                  width={58}
+                  height={44}
+                  className="h-12 w-auto object-contain"
+                />
+                <span className="font-display text-2xl leading-none text-paper sm:text-[1.85rem]">
+                  {t("clinicName")}
+                </span>
               </div>
 
-              {/* Bottom Copyright Bar */}
-              <div className="flex flex-wrap justify-between gap-4 border-t border-black/10 pt-8 text-[0.92rem] text-[#616161]">
-                <span>
-                  © 2026 {t("clinicName")}. {t("rights")}
+              <p className="mt-5 max-w-[34ch] text-[0.96rem] leading-relaxed text-white/65">
+                {t("addressLine1")}
+                <br />
+                {t("addressLine2")}
+              </p>
+
+              <div className="mt-7">
+                <a
+                  href={clinic.phoneHref}
+                  dir="ltr"
+                  className="font-display inline-block text-[clamp(1.75rem,3vw,2.4rem)] leading-none text-[#43a982] transition-colors hover:text-paper"
+                >
+                  {clinic.phone}
+                </a>
+                <a
+                  href={`mailto:${clinic.email}`}
+                  dir="ltr"
+                  className="mt-2.5 block w-fit text-[0.92rem] text-white/70 underline decoration-[#43a982]/60 underline-offset-4 transition-colors hover:text-[#43a982]"
+                >
+                  {clinic.email}
+                </a>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <Link
+                href="/contact"
+                className="group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#43a982] px-6 py-2.5 text-[0.92rem] font-semibold text-white transition-colors hover:bg-paper hover:text-ink"
+              >
+                <span>{t("contact")}</span>
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="transition-transform duration-300 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14" />
+                  <path d="m13 6 6 6-6 6" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Framed Bento Panel with Links & Named Social Pills */}
+          <div className="flex flex-col justify-between gap-8 rounded-3xl border border-[#43a982]/30 bg-white/[0.03] p-7 sm:p-9 lg:col-span-7">
+            <div className="grid gap-8 sm:grid-cols-3">
+              {/* Col 1: Clinic */}
+              <nav className="flex flex-col gap-3 text-[0.94rem] text-white/75">
+                <span className="mb-1 text-[0.74rem] font-semibold tracking-[0.18em] text-[#43a982] uppercase">
+                  {tn("clinic")}
                 </span>
-                <span>{t("cityCountry")}</span>
+                <Link
+                  href="/presentation"
+                  className="w-fit transition-colors hover:text-[#43a982]"
+                >
+                  {tn("presentation")}
+                </Link>
+                <Link
+                  href="/demarche-qualite"
+                  className="w-fit transition-colors hover:text-[#43a982]"
+                >
+                  {tn("quality")}
+                </Link>
+                <Link
+                  href="/votre-sejour"
+                  className="w-fit transition-colors hover:text-[#43a982]"
+                >
+                  {tn("stay")}
+                </Link>
+                <Link
+                  href="/actualites"
+                  className="w-fit transition-colors hover:text-[#43a982]"
+                >
+                  {tn("news")}
+                </Link>
+              </nav>
+
+              {/* Col 2: Services */}
+              <nav className="flex flex-col gap-3 text-[0.94rem] text-white/75">
+                <span className="mb-1 text-[0.74rem] font-semibold tracking-[0.18em] text-[#43a982] uppercase">
+                  {t("services")}
+                </span>
+                <Link
+                  href="/services/specialites-chirurgicales"
+                  className="w-fit transition-colors hover:text-[#43a982]"
+                >
+                  {tn("surgical")}
+                </Link>
+                <Link
+                  href="/services/specialites-medicales"
+                  className="w-fit transition-colors hover:text-[#43a982]"
+                >
+                  {tn("medical")}
+                </Link>
+                <Link
+                  href="/services/gynecologie-obstetrique"
+                  className="w-fit transition-colors hover:text-[#43a982]"
+                >
+                  {tn("gyneco")}
+                </Link>
+                <Link
+                  href="/services/plateau-technique"
+                  className="w-fit transition-colors hover:text-[#43a982]"
+                >
+                  {tn("technical")}
+                </Link>
+                <Link
+                  href="/services/urgences"
+                  className="w-fit transition-colors hover:text-[#43a982]"
+                >
+                  {tn("emergency")}
+                </Link>
+              </nav>
+
+              {/* Col 3: Keep in touch */}
+              <nav className="flex flex-col gap-3 text-[0.94rem] text-white/75">
+                <span className="mb-1 text-[0.74rem] font-semibold tracking-[0.18em] text-[#43a982] uppercase">
+                  {t("keepInTouch")}
+                </span>
+                <Link
+                  href="/contact"
+                  className="w-fit transition-colors hover:text-[#43a982]"
+                >
+                  {t("review")}
+                </Link>
+                <Link
+                  href="/recrutement"
+                  className="w-fit transition-colors hover:text-[#43a982]"
+                >
+                  {t("recruitment")}
+                </Link>
+                <Link
+                  href="/contact"
+                  className="w-fit transition-colors hover:text-[#43a982]"
+                >
+                  {t("contact")}
+                </Link>
+              </nav>
+            </div>
+
+            {/* Social Pills inside Bento Panel */}
+            <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-6">
+              <span className="text-[0.74rem] font-semibold tracking-[0.18em] text-[#43a982] uppercase">
+                {t("follow")}
+              </span>
+              <div className="flex flex-wrap gap-2.5">
+                <a
+                  href={clinic.facebook}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-4 py-1.5 text-[0.84rem] text-white/85 transition-colors hover:border-[#43a982] hover:bg-[#43a982] hover:text-white"
+                >
+                  <span>Facebook</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+                <a
+                  href={clinic.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-4 py-1.5 text-[0.84rem] text-white/85 transition-colors hover:border-[#43a982] hover:bg-[#43a982] hover:text-white"
+                >
+                  <span>LinkedIn</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+                <a
+                  href={clinic.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-4 py-1.5 text-[0.84rem] text-white/85 transition-colors hover:border-[#43a982] hover:bg-[#43a982] hover:text-white"
+                >
+                  <span>Instagram</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
               </div>
             </div>
           </div>
         </div>
-      </footer>
-    </div>
+
+        {/* Bottom Copyright Bar */}
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-7 text-[0.88rem] text-white/55">
+          <span>
+            © 2026 {t("clinicName")}. {t("rights")}
+          </span>
+          <span className="text-[#43a982]">{t("cityCountry")}</span>
+        </div>
+      </div>
+    </footer>
   );
 }

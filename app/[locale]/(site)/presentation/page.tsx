@@ -162,7 +162,7 @@ export default async function PresentationPage({
             </div>
 
             {/* Photo verticale du hall d'accueil */}
-            <div className="relative h-[440px] w-full overflow-hidden border border-[#5DC39B]/40 bg-mist sm:h-[520px]">
+            <div className="relative h-[525px] w-full overflow-hidden border border-[#5DC39B]/40 bg-mist sm:h-[620px]">
               <Image
                 src="/images/hall-accueil.jpg"
                 alt="Hall d'accueil — Clinique Essalem"
